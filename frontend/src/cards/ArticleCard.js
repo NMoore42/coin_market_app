@@ -47,9 +47,6 @@ export default function MediaCard() {
         <Button size="small" color="primary">
           Save
         </Button>
-        <Button size="small" color="primary">
-          Read More
-        </Button>
       </CardActions>
     </Card>
   );

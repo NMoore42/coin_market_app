@@ -34,7 +34,6 @@ import xlm_icon from '../../node_modules/cryptocurrency-icons/svg/black/xlm.svg'
 import trx_icon from '../../node_modules/cryptocurrency-icons/svg/black/trx.svg';
 import zec_icon from '../../node_modules/cryptocurrency-icons/svg/black/zec.svg';
 
-
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({

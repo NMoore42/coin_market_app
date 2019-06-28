@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import SendReceiveButton from '../subcomponents/SendReceiveButton';
 import QuantityInput from '../subcomponents/QuantityInput';
 import TickerSelect from '../subcomponents/TickerSelect';
+import SubmitButton from '../subcomponents/SubmitButton';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -37,7 +38,7 @@ export default function NewTransactionCard() {
       </Grid>
       <Grid container spacing={1}>
         <Grid item xs>
-          <Paper className={classes.paper}>xs</Paper>
+          <SubmitButton />
         </Grid>
       </Grid>
     </div>
