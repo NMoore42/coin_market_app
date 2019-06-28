@@ -20,7 +20,7 @@ import zec_icon from '../../node_modules/cryptocurrency-icons/svg/color/zec.svg'
 
 const useStyles = makeStyles({
   card: {
-    maxWidth: 300,
+    maxWidth: 290
   },
   media: {
     height: 20
@@ -39,17 +39,16 @@ export default function MediaCard() {
         <img src={btc_icon} />
         <CardContent>
           <Typography variant="body2" color="textSecondary" component="p">
-            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-            across all continents except Antarctica
+            Bitcoin breaks record grounds for 2019 as Alts see pullback...
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
         <Button size="small" color="primary">
-          Share
+          Save
         </Button>
         <Button size="small" color="primary">
-          Learn More
+          Read More
         </Button>
       </CardActions>
     </Card>

@@ -5,6 +5,8 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import CoinChartCard from '../cards/CoinChartCard'
 import ArticleCard from '../cards/ArticleCard'
+import NewTransactionCard from '../cards/NewTransactionCard';
+
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -26,8 +28,9 @@ export default function CoinContainer(props) {
         <Grid item xs={12}>
           <Paper className={classes.paper}>
             <Box m={-3}>
-              <h1>
-              {props.appState.mainPage} Past Week Performance
+              <h1 style={{width: "100%"}}>
+              <span>Portfolio Past Week Performance</span>
+              <span style={{position: "relative", float: "right", marginRight: "20px"}}>$10000</span>
               </h1>
             </Box>
             <CoinChartCard />
@@ -35,12 +38,7 @@ export default function CoinContainer(props) {
         </Grid>
         <Grid item xs={6}>
           <Paper className={classes.paper}>
-            Price
-            <Box m={-2}>
-              <h2>
-              $10,498
-              </h2>
-            </Box>
+            <NewTransactionCard />
           </Paper>
         </Grid>
         <Grid item xs={6}>
@@ -51,21 +49,6 @@ export default function CoinContainer(props) {
               $109,498,405
               </h2>
             </Box>
-          </Paper>
-        </Grid>
-        <Grid item xs={12}>
-          <Paper className={classes.paper}>
-            <Grid container className={classes.root} spacing={2}>
-              <Grid item xs={12}>
-                <Grid container justify="center" spacing={1}>
-                  {[0, 1, 2, 3].map(value => (
-                    <Grid key={value} item>
-                      <ArticleCard />
-                    </Grid>
-                  ))}
-                </Grid>
-              </Grid>
-            </Grid>
           </Paper>
         </Grid>
       </Grid>

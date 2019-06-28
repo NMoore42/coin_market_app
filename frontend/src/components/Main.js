@@ -22,6 +22,7 @@ import ChartIcon from '@material-ui/icons/BarChart';
 import ProfileIcon from '@material-ui/icons/Face';
 import MoneyIcon from '@material-ui/icons/AttachMoney';
 import ArticleIcon from '@material-ui/icons/LibraryBooks';
+import PortfolioContainer from '../containers/PortfolioContainer.js'
 import btc_icon from '../../node_modules/cryptocurrency-icons/svg/black/btc.svg';
 import eth_icon from '../../node_modules/cryptocurrency-icons/svg/black/eth.svg';
 import xrp_icon from '../../node_modules/cryptocurrency-icons/svg/black/xrp.svg';
@@ -120,7 +121,7 @@ export default function Main(props) {
   function renderSwitch(param) {
     switch(param) {
       case 'Portfolio':
-        return <p>Portfolio</p>;
+        return <PortfolioContainer appState={props.appState}/>;
       case 'Charts':
         return <p>Charts</p>;
       case 'Articles':
@@ -128,7 +129,7 @@ export default function Main(props) {
       case 'Profile':
         return <p>Profile</p>;
       default:
-        return <CoinContainer />;;
+        return <CoinContainer appState={props.appState}/>;;
       }
   }
 
@@ -188,7 +189,7 @@ export default function Main(props) {
         </List>
         <Divider />
         <List>
-          {['BTC', 'ETH', 'XRP', 'LTC', 'BCH', 'EOS', 'ADA', 'TRX', 'XLM', 'ZEC'].map((text, index) => (
+          {['Bitcoin', 'Ethereum', 'Ripple', 'Litecoin', 'Bitcoin Cash', 'EOS', 'Cardano', 'Tron', 'Stellar', 'ZCash'].map((text, index) => (
             <ListItem onClick={event => props.handleMenuClick(text)} button key={text}>
               <ListItemIcon >{[
                 <Icon>

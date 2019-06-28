@@ -7,7 +7,7 @@ export default class App extends Component {
   constructor() {
     super()
     this.state = {
-      user: "",
+      user: "Nick",
       coins: [],
       loggedIn: false,
       mainPage: "Portfolio"
