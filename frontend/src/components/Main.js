@@ -23,6 +23,7 @@ import ProfileIcon from '@material-ui/icons/Face';
 import MoneyIcon from '@material-ui/icons/AttachMoney';
 import ArticleIcon from '@material-ui/icons/LibraryBooks';
 import PortfolioContainer from '../containers/PortfolioContainer.js'
+import ArticleContainer from '../containers/ArticleContainer.js'
 import btc_icon from '../../node_modules/cryptocurrency-icons/svg/black/btc.svg';
 import eth_icon from '../../node_modules/cryptocurrency-icons/svg/black/eth.svg';
 import xrp_icon from '../../node_modules/cryptocurrency-icons/svg/black/xrp.svg';
@@ -124,7 +125,7 @@ export default function Main(props) {
       case 'Charts':
         return <p>Charts</p>;
       case 'Articles':
-        return <p>Articles</p>;
+        return <ArticleContainer appState={props.appState}/>;
       case 'Profile':
         return <p>Profile</p>;
       default:

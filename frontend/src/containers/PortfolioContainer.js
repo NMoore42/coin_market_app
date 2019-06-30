@@ -6,6 +6,7 @@ import Box from '@material-ui/core/Box';
 import CoinChartCard from '../cards/CoinChartCard'
 import ArticleCard from '../cards/ArticleCard'
 import NewTransactionCard from '../cards/NewTransactionCard';
+import HistoricalTransactionContainer from './HistoricalTransactionContainer'
 
 
 const useStyles = makeStyles(theme => ({
@@ -38,17 +39,19 @@ export default function CoinContainer(props) {
         </Grid>
         <Grid item xs={6}>
           <Paper className={classes.paper}>
+            <Box m={-3}>
+              <h4>New Transactions</h4>
+            </Box>
             <NewTransactionCard />
           </Paper>
         </Grid>
         <Grid item xs={6}>
           <Paper className={classes.paper}>
-            Market Cap
-            <Box m={-2}>
-              <h2>
-              $109,498,405
-              </h2>
+            <Box m={-3}>
+              <h4>Recent Transactions</h4>
             </Box>
+            <br></br>
+            <HistoricalTransactionContainer />
           </Paper>
         </Grid>
       </Grid>

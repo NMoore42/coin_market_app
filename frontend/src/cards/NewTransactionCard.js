@@ -6,6 +6,7 @@ import SendReceiveButton from '../subcomponents/SendReceiveButton';
 import QuantityInput from '../subcomponents/QuantityInput';
 import TickerSelect from '../subcomponents/TickerSelect';
 import SubmitButton from '../subcomponents/SubmitButton';
+import Box from '@material-ui/core/Box';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -25,20 +26,28 @@ export default function NewTransactionCard() {
     <div className={classes.root}>
       <Grid container spacing={4}>
         <Grid item xs>
-          <SendReceiveButton />
+          <Box m={1}>
+            <SendReceiveButton />
+          </Box>
         </Grid>
         <Grid item xs>
-          <QuantityInput />
+          <Box m={1}>
+            <QuantityInput />
+          </Box>
         </Grid>
       </Grid>
       <Grid container spacing={1}>
         <Grid item xs>
-          <TickerSelect />
+          <Box m={1}>
+            <TickerSelect />
+          </Box>
         </Grid>
       </Grid>
       <Grid container spacing={1}>
         <Grid item xs>
-          <SubmitButton />
+          <Box m={3.1}>
+            <SubmitButton />
+          </Box>
         </Grid>
       </Grid>
     </div>
