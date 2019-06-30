@@ -2,6 +2,19 @@ import React, { Component } from 'react';
 import Main from './components/Main.js'
 import './App.css'
 
+const coins = {
+  "Bitcoin": "btc",
+  "Ethereum": "eth",
+  "Ripple": "xrp",
+  "Litecoin": "ltc",
+  "Bitcoin Cash": "bch",
+  "EOS": "eos",
+  "Cardano": "ada",
+  "Tron": "trx",
+  "Stellar": "xlm",
+  "ZCash": "zec"
+}
+
 
 export default class App extends Component {
   constructor() {
@@ -10,7 +23,19 @@ export default class App extends Component {
       user: "Nick",
       coins: [],
       loggedIn: false,
-      mainPage: "Portfolio"
+      mainPage: "Portfolio",
+      currentPrices: {
+        "Bitcoin": 0,
+        "Ethereum": 0,
+        "Ripple": 0,
+        "Litecoin": 0,
+        "Bitcoin Cash": 0,
+        "EOS": 0,
+        "Cardano": 0,
+        "Tron": 0,
+        "Stellar": 0,
+        "ZCash": 0
+      }
     }
   }
 
@@ -26,6 +51,27 @@ export default class App extends Component {
     })
   }
 
+  componentDidMount = () => {
+    this.getCoinPrices();
+
+    this.interval = setInterval(this.getCoinPrices, 60000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
+  getCoinPrices = () => {
+    for (let key in coins) {
+      fetch(`https://api.cryptonator.com/api/ticker/${coins[key]}-usd`)
+        .then(res => res.json())
+        .then(data => this.setState(prevState => {
+          let currentPrices = Object.assign({}, prevState.currentPrices);
+          currentPrices[key] = parseFloat(data.ticker.price).toFixed(2);
+          return { currentPrices };
+        }))
+    }
+  }
 
   render() {
     return (

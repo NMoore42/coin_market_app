@@ -29,12 +29,14 @@ export default function CoinContainer(props) {
         <Grid item xs={12}>
           <Paper className={classes.paper}>
             <Box m={-3}>
-              <h1 style={{width: "100%"}}>
-              <span>Portfolio Past Week Performance</span>
-              <span style={{position: "relative", float: "right", marginRight: "20px"}}>$10000</span>
-              </h1>
+              <h1>Total Portfolio Value</h1>
             </Box>
-            <CoinChartCard />
+            <Box m={-3}>
+              <h6>As of 8:56</h6>
+            </Box>
+            <Box m={-5}>
+              <h1 style={{fontSize: "100px"}}>$57,495</h1>
+            </Box>
           </Paper>
         </Grid>
         <Grid item xs={6}>

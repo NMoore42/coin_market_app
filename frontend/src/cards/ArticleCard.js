@@ -35,8 +35,9 @@ export default function MediaCard() {
       <CardActionArea>
         <CardMedia
           className={classes.media}
+          image={"none"}
         />
-        <img src={btc_icon} />
+      <img src={btc_icon} alt="" />
         <CardContent>
           <Typography variant="body2" color="textSecondary" component="p">
             Bitcoin breaks record grounds for 2019 as Alts see pullback...

@@ -5,6 +5,9 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import CoinChartCard from '../cards/CoinChartCard'
 import ArticleCard from '../cards/ArticleCard'
+import NewTransactionCard from '../cards/NewTransactionCard';
+import HistoricalTransactionContainer from './HistoricalTransactionContainer'
+
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -17,7 +20,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function CoinContainer(props) {
+export default function ChartsContainer(props) {
   const classes = useStyles();
 
   return (
@@ -26,44 +29,26 @@ export default function CoinContainer(props) {
         <Grid item xs={12}>
           <Paper className={classes.paper}>
             <Box m={-3}>
-              <h1>
-              {props.appState.mainPage} Past Week Performance
-              </h1>
+              <h1>Portfolio Past Week Performance</h1>
             </Box>
             <CoinChartCard />
           </Paper>
         </Grid>
         <Grid item xs={6}>
           <Paper className={classes.paper}>
-            Price
-            <Box m={-2}>
-              <h2>{props.appState.currentPrices[props.appState.mainPage]}</h2>
+            <Box m={-3}>
+              <h4>Currency Holdings</h4>
             </Box>
+            <NewTransactionCard />
           </Paper>
         </Grid>
         <Grid item xs={6}>
           <Paper className={classes.paper}>
-            Market Cap
-            <Box m={-2}>
-              <h2>
-              $109,498,405
-              </h2>
+            <Box m={-3}>
+              <h4>Asset Allocation</h4>
             </Box>
-          </Paper>
-        </Grid>
-        <Grid item xs={12}>
-          <Paper className={classes.paper}>
-            <Grid container className={classes.root} spacing={2}>
-              <Grid item xs={12}>
-                <Grid container justify="center" spacing={1}>
-                  {[0, 1, 2, 3].map(value => (
-                    <Grid key={value} item>
-                      <ArticleCard />
-                    </Grid>
-                  ))}
-                </Grid>
-              </Grid>
-            </Grid>
+            <br></br>
+            <HistoricalTransactionContainer />
           </Paper>
         </Grid>
       </Grid>
