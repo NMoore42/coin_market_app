@@ -4,6 +4,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import ArticleCard from '../cards/ArticleCard'
+import uuid from 'uuid'
 
 
 const useStyles = makeStyles(theme => ({
@@ -17,6 +18,19 @@ const useStyles = makeStyles(theme => ({
 
   },
 }));
+
+function createArticleCards(props) {
+    return props.appState.userArticles.map(article =>
+      <Grid key={uuid.v4()}item>
+        <ArticleCard
+          appState={props.appState}
+          coinImg={article.coinImg}
+          handleArticleRemove={props.handleArticleRemove}
+          articleData={article}
+        />
+      </Grid>
+    )
+}
 
 export default function ArticleContainer(props) {
   const classes = useStyles();
@@ -32,11 +46,7 @@ export default function ArticleContainer(props) {
               </h1>
             </Box>
             <Grid container justify="center" spacing={1}>
-              {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(value => (
-                <Grid key={value} item>
-                  <ArticleCard />d
-                </Grid>
-              ))}
+              {createArticleCards(props)}
             </Grid>
           </Paper>
         </Grid>

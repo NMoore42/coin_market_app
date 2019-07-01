@@ -46,7 +46,8 @@ export default class App extends Component {
         "Tron": [],
         "Stellar": [],
         "ZCash": []
-      }
+      },
+      userArticles: [],
     }
   }
 
@@ -59,6 +60,20 @@ export default class App extends Component {
   handleMenuClick = (text) => {
     this.setState({
       mainPage: text
+    })
+  }
+
+  handleArticleSave = (articleData, coinImgKey) => {
+    articleData.coinImg = coinImgKey;
+    this.setState({
+      userArticles: [...this.state.userArticles, articleData]
+    })
+  }
+
+  handleArticleRemove = (articleData, coinImgKey) => {
+    articleData.coinImg = coinImgKey;
+    this.setState({
+      userArticles: this.state.userArticles.filter(art => art !== articleData)
     })
   }
 
@@ -109,7 +124,12 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        <Main logIn={this.logIn} handleMenuClick={this.handleMenuClick} appState={this.state}/>
+        <Main
+          logIn={this.logIn}
+          handleMenuClick={this.handleMenuClick}
+          handleArticleSave={this.handleArticleSave}
+          handleArticleRemove={this.handleArticleRemove}
+          appState={this.state}/>
       </div>
     )
   }

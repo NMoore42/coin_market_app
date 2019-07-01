@@ -126,11 +126,11 @@ export default function Main(props) {
       case 'Charts':
         return <ChartsContainer appState={props.appState} />
       case 'Articles':
-        return <ArticleContainer appState={props.appState}/>;
+        return <ArticleContainer appState={props.appState} handleArticleRemove={props.handleArticleRemove}/>;
       case 'Profile':
         return <p>Profile</p>;
       default:
-        return <CoinContainer appState={props.appState}/>;;
+        return <CoinContainer appState={props.appState} handleArticleSave={props.handleArticleSave}/>;;
       }
   }
 

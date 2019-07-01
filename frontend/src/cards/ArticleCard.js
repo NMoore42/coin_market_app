@@ -45,6 +45,26 @@ function openURL(url) {
   window.open(url)
 }
 
+function saveOrDeleteButton(props) {
+  if (props.appState.mainPage === "Articles") {
+    return <Button
+      onClick={event => props.handleArticleRemove(props.articleData, props.appState.mainPage)}
+      size="small"
+      color="primary">
+      Remove
+    </Button>
+  } else if (props.appState.userArticles.filter(article => article.url === props.articleData.url).length) {
+    return <Button size="small" disabled color="primary">Saved</Button>
+  } else {
+    return <Button
+      onClick={event => props.handleArticleSave(props.articleData, props.appState.mainPage)}
+      size="small"
+      color="primary">
+      Save
+    </Button>
+  }
+}
+
 export default function MediaCard(props) {
   const classes = useStyles();
 
@@ -53,7 +73,7 @@ export default function MediaCard(props) {
       <CardActionArea onClick={event => openURL(props.articleData.url)}>
         <CardContent>
           <Box m={1}>
-            <img src={coins[props.appState.mainPage]} alt="" />
+            <img src={coins[props.coinImg]} alt="" />
           </Box>
           <Typography variant="body2" color="textSecondary" component="p">
             {props.articleData.title.slice(0,65) + "..."}
@@ -61,9 +81,7 @@ export default function MediaCard(props) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
-          Save
-        </Button>
+        {saveOrDeleteButton(props)}
       </CardActions>
     </Card>
   );
