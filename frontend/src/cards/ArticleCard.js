@@ -6,6 +6,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
+import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import btc_icon from '../../node_modules/cryptocurrency-icons/svg/color/btc.svg';
 import eth_icon from '../../node_modules/cryptocurrency-icons/svg/color/eth.svg';
@@ -18,6 +19,19 @@ import xlm_icon from '../../node_modules/cryptocurrency-icons/svg/color/xlm.svg'
 import trx_icon from '../../node_modules/cryptocurrency-icons/svg/color/trx.svg';
 import zec_icon from '../../node_modules/cryptocurrency-icons/svg/color/zec.svg';
 
+const coins = {
+  "Bitcoin": btc_icon,
+  "Ethereum": eth_icon,
+  "Ripple": xrp_icon,
+  "Litecoin": ltc_icon,
+  "Bitcoin Cash": bch_icon,
+  "EOS": eos_icon,
+  "Cardano": ada_icon,
+  "Tron": trx_icon,
+  "Stellar": xlm_icon,
+  "ZCash": trx_icon
+}
+
 const useStyles = makeStyles({
   card: {
     maxWidth: 290
@@ -27,20 +41,22 @@ const useStyles = makeStyles({
   },
 });
 
-export default function MediaCard() {
+function openURL(url) {
+  window.open(url)
+}
+
+export default function MediaCard(props) {
   const classes = useStyles();
 
   return (
     <Card className={classes.card}>
-      <CardActionArea>
-        <CardMedia
-          className={classes.media}
-          image={"none"}
-        />
-      <img src={btc_icon} alt="" />
+      <CardActionArea onClick={event => openURL(props.articleData.url)}>
         <CardContent>
+          <Box m={1}>
+            <img src={coins[props.appState.mainPage]} alt="" />
+          </Box>
           <Typography variant="body2" color="textSecondary" component="p">
-            Bitcoin breaks record grounds for 2019 as Alts see pullback...
+            {props.articleData.title.slice(0,65) + "..."}
           </Typography>
         </CardContent>
       </CardActionArea>

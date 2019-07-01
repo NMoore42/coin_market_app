@@ -66,11 +66,13 @@ export default class App extends Component {
     this.getCoinPrices();
     this.getNewsArticles();
 
-    this.interval = setInterval(this.getCoinPrices, 60000);
+    //this.interval = setInterval(this.getCoinPrices, 60000);
+    //Remove comment on above when running live demo to live update prices
   }
 
   componentWillUnmount() {
-    clearInterval(this.interval);
+    //clearInterval(this.interval);
+    //Remove comment on above when running live demo to live update prices
   }
 
   getDate = () => {

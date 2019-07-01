@@ -21,9 +21,9 @@ const useStyles = makeStyles(theme => ({
 function createArticleCards(props) {
   let articles = props.appState.articles[props.appState.mainPage]
   if (articles.length > 4) {
-    return articles.slice(0, 4).map(article => <Grid key={uuid.v4()} item><ArticleCard /></Grid>)
+    return articles.slice(0, 4).map(article => <Grid key={uuid.v4()} item><ArticleCard appState={props.appState} articleData={article} /></Grid>)
   } else if (articles.length > 0) {
-    return articles.map(article => <Grid key={uuid.v4()} item><ArticleCard /></Grid>)
+    return articles.map(article => <Grid key={uuid.v4()} item><ArticleCard appState={props.appState} articleData={article} /></Grid>)
   } else {
     return <h3>Sorry, there are no new {props.appState.mainPage} articles at this time</h3>
   }
