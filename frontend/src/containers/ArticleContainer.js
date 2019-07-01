@@ -20,6 +20,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function createArticleCards(props) {
+  if (props.appState.userArticles.length) {
     return props.appState.userArticles.map(article =>
       <Grid key={uuid.v4()}item>
         <ArticleCard
@@ -30,6 +31,9 @@ function createArticleCards(props) {
         />
       </Grid>
     )
+  } else {
+    return <h3>You do not have any saved articles</h3>
+  }
 }
 
 export default function ArticleContainer(props) {

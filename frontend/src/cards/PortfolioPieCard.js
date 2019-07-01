@@ -77,7 +77,7 @@ export default class PortfolioPieCard extends PureComponent {
 
   render() {
     return (
-      <PieChart width={500} height={300}>
+      <PieChart width={800} height={300}>
         <Pie
           activeIndex={this.state.activeIndex}
           activeShape={renderActiveShape}

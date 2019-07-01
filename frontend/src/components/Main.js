@@ -23,6 +23,7 @@ import ProfileIcon from '@material-ui/icons/Face';
 import MoneyIcon from '@material-ui/icons/AttachMoney';
 import ArticleIcon from '@material-ui/icons/LibraryBooks';
 import PortfolioContainer from '../containers/PortfolioContainer.js'
+import ProfileContainer from '../containers/ProfileContainer.js'
 import ArticleContainer from '../containers/ArticleContainer.js'
 import ChartsContainer from '../containers/ChartsContainer.js'
 import btc_icon from '../../node_modules/cryptocurrency-icons/svg/black/btc.svg';
@@ -122,13 +123,13 @@ export default function Main(props) {
   function renderSwitch(param) {
     switch(param) {
       case 'Portfolio':
-        return <PortfolioContainer appState={props.appState}/>;
+        return <PortfolioContainer appState={props.appState}/>
       case 'Charts':
         return <ChartsContainer appState={props.appState} />
       case 'Articles':
         return <ArticleContainer appState={props.appState} handleArticleRemove={props.handleArticleRemove}/>;
       case 'Profile':
-        return <p>Profile</p>;
+        return <ProfileContainer appState={props.appState}/>;
       default:
         return <CoinContainer appState={props.appState} handleArticleSave={props.handleArticleSave}/>;;
       }
