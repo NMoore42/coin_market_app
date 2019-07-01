@@ -71,7 +71,7 @@ export default class PortfolioBarCard extends PureComponent {
         <XAxis dataKey="name" />
         <YAxis />
         <Tooltip content={<CustomTooltip />} />
-        <Bar dataKey="pv" barSize={20} fill={"#8884d8"} />
+        <Bar dataKey="pv" barSize={20} fill={"#3F51B5"} />
       </BarChart>
     );
   }

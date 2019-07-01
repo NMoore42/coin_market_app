@@ -86,7 +86,7 @@ export default class PortfolioPieCard extends PureComponent {
           cy={150}
           innerRadius={60}
           outerRadius={80}
-          fill="#8884d8"
+          fill="#3F51B5"
           dataKey="value"
           onMouseEnter={this.onPieEnter}
         />

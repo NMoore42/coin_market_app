@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Main from './components/Main.js'
+import Login from './login'
 import './App.css'
 
 const coins = {
@@ -23,6 +24,7 @@ export default class App extends Component {
       coins: [],
       loggedIn: false,
       mainPage: "Portfolio",
+      loginPageTab: true,
       currentPrices: {
         "Bitcoin": 0,
         "Ethereum": 0,
@@ -77,9 +79,16 @@ export default class App extends Component {
     })
   }
 
+  handleLoginPageTab = (clicked) => {
+    if (clicked !== this.state.loginPageTab)
+    this.setState({
+      loginPageTab: !this.state.loginPageTab
+    })
+  }
+
   componentDidMount = () => {
-    this.getCoinPrices();
-    this.getNewsArticles();
+    //this.getCoinPrices();
+    //this.getNewsArticles();
 
     //this.interval = setInterval(this.getCoinPrices, 60000);
     //Remove comment on above when running live demo to live update prices
@@ -97,7 +106,7 @@ export default class App extends Component {
   }
 
   getNewsArticles = () => {
-    const newsAPI = "a8e761bdc20b4912a6cdfac98e565cba"
+    const newsAPI = "d695935ffeda42deba77d5caaee2a58f"
     for (let key in coins) {
       fetch(`https://newsapi.org/v2/everything?q=${coins[key]}&apiKey=${newsAPI}`)
         .then(res => res.json())
@@ -121,15 +130,27 @@ export default class App extends Component {
     }
   }
 
+  renderLogIn = () => {
+    return this.state.loggedIn
+    ?
+      <Main
+        logIn={this.logIn}
+        handleMenuClick={this.handleMenuClick}
+        handleArticleSave={this.handleArticleSave}
+        handleArticleRemove={this.handleArticleRemove}
+        appState={this.state}
+      />
+    :
+      <Login
+        loginPageTab={this.state.loginPageTab}
+        handleLoginPageTab={this.handleLoginPageTab}
+      />
+  }
+
   render() {
     return (
       <div>
-        <Main
-          logIn={this.logIn}
-          handleMenuClick={this.handleMenuClick}
-          handleArticleSave={this.handleArticleSave}
-          handleArticleRemove={this.handleArticleRemove}
-          appState={this.state}/>
+        {this.renderLogIn()}
       </div>
     )
   }
