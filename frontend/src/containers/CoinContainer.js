@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import CoinChartCard from '../cards/CoinChartCard'
 import ArticleCard from '../cards/ArticleCard'
+import uuid from 'uuid'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -16,6 +17,17 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.text.secondary
   },
 }));
+
+function createArticleCards(props) {
+  let articles = props.appState.articles[props.appState.mainPage]
+  if (articles.length > 4) {
+    return articles.slice(0, 4).map(article => <Grid key={uuid.v4()} item><ArticleCard /></Grid>)
+  } else if (articles.length > 0) {
+    return articles.map(article => <Grid key={uuid.v4()} item><ArticleCard /></Grid>)
+  } else {
+    return <h3>Sorry, there are no new {props.appState.mainPage} articles at this time</h3>
+  }
+}
 
 export default function CoinContainer(props) {
   const classes = useStyles();
@@ -56,11 +68,7 @@ export default function CoinContainer(props) {
             <Grid container className={classes.root} spacing={2}>
               <Grid item xs={12}>
                 <Grid container justify="center" spacing={1}>
-                  {[0, 1, 2, 3].map(value => (
-                    <Grid key={value} item>
-                      <ArticleCard />
-                    </Grid>
-                  ))}
+                  {createArticleCards(props)}
                 </Grid>
               </Grid>
             </Grid>

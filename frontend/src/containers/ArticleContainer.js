@@ -28,13 +28,13 @@ export default function ArticleContainer(props) {
           <Paper className={classes.paper}>
             <Box m={-3}>
               <h1>
-              {props.appState.user}'s Articles
+              Your Saved Articles
               </h1>
             </Box>
             <Grid container justify="center" spacing={1}>
               {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(value => (
                 <Grid key={value} item>
-                  <ArticleCard />
+                  <ArticleCard />d
                 </Grid>
               ))}
             </Grid>
