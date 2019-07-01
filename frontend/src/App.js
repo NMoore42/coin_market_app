@@ -15,7 +15,6 @@ const coins = {
   "ZCash": "zec"
 }
 
-
 export default class App extends Component {
   constructor() {
     super()
@@ -35,6 +34,18 @@ export default class App extends Component {
         "Tron": 0,
         "Stellar": 0,
         "ZCash": 0
+      },
+      articles: {
+        "Bitcoin": [],
+        "Ethereum": [],
+        "Ripple": [],
+        "Litecoin": [],
+        "Bitcoin Cash": [],
+        "EOS": [],
+        "Cardano": [],
+        "Tron": [],
+        "Stellar": [],
+        "ZCash": []
       }
     }
   }
@@ -53,12 +64,32 @@ export default class App extends Component {
 
   componentDidMount = () => {
     this.getCoinPrices();
+    this.getNewsArticles();
 
     this.interval = setInterval(this.getCoinPrices, 60000);
   }
 
   componentWillUnmount() {
     clearInterval(this.interval);
+  }
+
+  getDate = () => {
+    let date = new Date();
+    date.setMonth(date.getMonth() - 1)
+    return date.toISOString().slice(0,10)
+  }
+
+  getNewsArticles = () => {
+    const newsAPI = "a8e761bdc20b4912a6cdfac98e565cba"
+    for (let key in coins) {
+      fetch(`https://newsapi.org/v2/everything?q=${coins[key]}&apiKey=${newsAPI}`)
+        .then(res => res.json())
+        .then(data => this.setState(prevState => {
+          let articles = Object.assign({}, prevState.articles);
+          articles[key] = data.articles.filter(obj => obj.title.includes(key));
+          return { articles };
+        }))
+    }
   }
 
   getCoinPrices = () => {
