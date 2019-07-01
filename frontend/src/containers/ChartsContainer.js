@@ -4,6 +4,8 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import CoinChartCard from '../cards/CoinChartCard'
+import PortfolioPieCard from '../cards/PortfolioPieCard'
+import PortfolioBarCard from '../cards/PortfolioBarCard'
 import ArticleCard from '../cards/ArticleCard'
 import NewTransactionCard from '../cards/NewTransactionCard';
 import HistoricalTransactionContainer from './HistoricalTransactionContainer'
@@ -39,16 +41,16 @@ export default function ChartsContainer(props) {
             <Box m={-3}>
               <h4>Currency Holdings</h4>
             </Box>
-            <NewTransactionCard />
+            <PortfolioPieCard />
           </Paper>
         </Grid>
         <Grid item xs={6}>
           <Paper className={classes.paper}>
             <Box m={-3}>
-              <h4>Asset Allocation</h4>
+              <h4>Currency Holdings</h4>
             </Box>
             <br></br>
-            <HistoricalTransactionContainer />
+            <PortfolioBarCard />
           </Paper>
         </Grid>
       </Grid>
