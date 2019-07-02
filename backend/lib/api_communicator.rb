@@ -20,22 +20,6 @@ class APICall
     data= parsed_data["data"]
   end
 
-  # def self.get_data
-  #   data = self.api_call
-  #   returnHash = {
-  #     "BTC" => data.find{|coin| coin["symbol"] == "BTC"},
-  #     "LTC" => data.find{|coin| coin["symbol"] == "LTC"},
-  #     "BCH" => data.find{|coin| coin["symbol"] == "BCH"},
-  #     "ZEC" => data.find{|coin| coin["symbol"] == "ZEC"},
-  #     "ADA" => data.find{|coin| coin["symbol"] == "ADA"},
-  #     "XRP" => data.find{|coin| coin["symbol"] == "XRP"},
-  #     "XLM" => data.find{|coin| coin["symbol"] == "XLM"},
-  #     "EOS" => data.find{|coin| coin["symbol"] == "EOS"},
-  #     "TRX" => data.find{|coin| coin["symbol"] == "TRX"},
-  #     "ETH" => data.find{|coin| coin["symbol"] == "ETH"}
-  #   }
-  # end
-
   def self.get_data
     data = self.api_call
     returnHash = {
@@ -53,7 +37,3 @@ class APICall
   end
 
 end
-
-
-
-puts APICall.get_data

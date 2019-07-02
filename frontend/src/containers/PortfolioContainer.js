@@ -20,6 +20,14 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+function calcPortfolioBalance(props) {
+  let totalVal = 0
+  for (let key in props.appState.currentPrices) {
+    totalVal += (props.appState.currentPrices[key] * props.appState.coins[key])
+  }
+  return totalVal.toFixed(0)
+}
+
 export default function CoinContainer(props) {
   const classes = useStyles();
 
@@ -32,10 +40,10 @@ export default function CoinContainer(props) {
               <h1>Total Portfolio Value</h1>
             </Box>
             <Box m={-3}>
-              <h6>As of 8:56</h6>
+              <h6>As of {new Date().toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}</h6>
             </Box>
             <Box m={-5}>
-              <h1 style={{fontSize: "100px"}}>$57,495</h1>
+              <h1 style={{fontSize: "100px"}}>${calcPortfolioBalance(props)}</h1>
             </Box>
           </Paper>
         </Grid>

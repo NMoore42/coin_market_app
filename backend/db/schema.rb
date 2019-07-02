@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 2019_06_26_183249) do
 
   create_table "cryptos", force: :cascade do |t|
     t.string "name"
-    t.integer "price"
+    t.float "price"
     t.string "ticker"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 2019_06_26_183249) do
   create_table "transactions", force: :cascade do |t|
     t.integer "user_id"
     t.integer "crypto_id"
-    t.integer "quantity"
+    t.float "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

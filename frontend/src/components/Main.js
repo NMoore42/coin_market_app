@@ -191,7 +191,7 @@ export default function Main(props) {
         </List>
         <Divider />
         <List>
-          {['Bitcoin', 'Ethereum', 'Ripple', 'Litecoin', 'Bitcoin Cash', 'EOS', 'Cardano', 'Tron', 'Stellar', 'ZCash'].map((text, index) => (
+          {['Bitcoin', 'Ethereum', 'Ripple', 'Litecoin', 'Bitcoin Cash', 'EOS', 'Cardano', 'TRON', 'Stellar', 'Zcash'].map((text, index) => (
             <ListItem onClick={event => props.handleMenuClick(text)} button key={text}>
               <ListItemIcon >{[
                 <Icon>

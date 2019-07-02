@@ -1,34 +1,36 @@
-import React from 'react';
-import "../App.css"
-import "../../node_modules/react-vis/dist/style.css"
-import {XYPlot, LineSeries, VerticalGridLines, HorizontalGridLines, XAxis, YAxis, ChartLabel} from "react-vis"
+import React, { PureComponent } from 'react';
+import {
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
+} from 'recharts';
 
-export default function CoinChartCard() {
-  const data = [
-      {x: 0, y: 9690},
-      {x: 1, y: 10478},
-      {x: 2, y: 10122},
-      {x: 3, y: 11043},
-      {x: 4, y: 10079},
-      {x: 5, y: 11879},
-      {x: 6, y: 12789}
-    ]
 
-    return(
-      <div style={{justifyContent:'center'}} className="Bar">
-        <XYPlot height={250} width={1180}>
-          <VerticalGridLines />
-          <HorizontalGridLines />
-          <XAxis tickTotal={7} title="Day" />
-          <YAxis title="Price (USD)"/>
-          <ChartLabel
-            className="alt-x-label"
-            includeMargin={true}
-            xPercent={0.5}
-            yPercent={.03}
-          />
-          <LineSeries data={data} />
-        </XYPlot>
-      </div>
-    )
+export default class Example extends PureComponent {
+  static jsfiddleUrl = 'https://jsfiddle.net/alidingling/xqjtetw0/';
+
+  getCoinPerformance = () => {
+    let data = this.props.appState.historicalPrices[this.props.appState.mainPage]
+    data.forEach((element, index) => data[index]["day"] = data[index]["created_at"].slice(5,10))
+    return data
+  }
+
+  render() {
+    return (
+      <LineChart
+        width={1150}
+        height={300}
+        data={this.getCoinPerformance()}
+        margin={{
+          top: 10, right: 30, left: 20, bottom: 5,
+        }}
+      >
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="day" />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        <Line type="monotone" dataKey="price" stroke="#8884d8" activeDot={{ r: 8 }} />
+
+      </LineChart>
+    );
+  }
 }

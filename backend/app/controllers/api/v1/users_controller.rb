@@ -23,7 +23,7 @@ class Api::V1::UsersController < ApplicationController
     email = params[:email]
     @user = User.all.find_by(email: email)
     if @user
-      @coins = {bitcoin: 32, litecoin: 11}
+      @coins = Transaction.get_user_coins(@user.id)
       @articles = {}
       render json: {user: @user, coins: @coins}
     else

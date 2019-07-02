@@ -11,9 +11,9 @@ const coins = {
   "Bitcoin Cash": "bch",
   "EOS": "eos",
   "Cardano": "ada",
-  "Tron": "trx",
+  "TRON": "trx",
   "Stellar": "xlm",
-  "ZCash": "zec"
+  "Zcash": "zec"
 }
 
 export default class App extends Component {
@@ -21,8 +21,19 @@ export default class App extends Component {
     super()
     this.state = {
       user: "",
-      coins: [],
-      loggedIn: false,
+      coins: {
+        "Bitcoin": 0,
+        "Ethereum": 0,
+        "Ripple": 0,
+        "Litecoin": 0,
+        "Bitcoin Cash": 0,
+        "EOS": 0,
+        "Cardano": 0,
+        "TRON": 0,
+        "Stellar": 0,
+        "Zcash": 0
+      },
+      loggedIn: true,
       mainPage: "Portfolio",
       loginPageTab: 0,
       currentPrices: {
@@ -33,9 +44,21 @@ export default class App extends Component {
         "Bitcoin Cash": 0,
         "EOS": 0,
         "Cardano": 0,
-        "Tron": 0,
+        "TRON": 0,
         "Stellar": 0,
-        "ZCash": 0
+        "Zcash": 0
+      },
+      historicalPrices: {
+        "Bitcoin": [],
+        "Ethereum": [],
+        "Ripple": [],
+        "Litecoin": [],
+        "Bitcoin Cash": [],
+        "EOS": [],
+        "Cardano": [],
+        "TRON": [],
+        "Stellar": [],
+        "Zcash": []
       },
       articles: {
         "Bitcoin": [],
@@ -45,9 +68,9 @@ export default class App extends Component {
         "Bitcoin Cash": [],
         "EOS": [],
         "Cardano": [],
-        "Tron": [],
+        "TRON": [],
         "Stellar": [],
-        "ZCash": []
+        "Zcash": []
       },
       userArticles: [],
       loginEmail: "",
@@ -106,7 +129,17 @@ export default class App extends Component {
         email: this.state.loginEmail,
         password: this.state.loginPassword
       })
-    }).then(res => res.json()).then(res => console.log(res))
+    }).then(res => res.json()).then(res => {
+      let newCoins = Object.assign({}, this.state.coins)
+      for (let key in res.coins) {
+        newCoins[key] = res.coins[key]
+      }
+      this.setState({
+      loggedIn: true,
+      user: res.user.name,
+      coins: newCoins
+    })
+    })
   }
 
   validateLoginUser = () => {
@@ -182,7 +215,7 @@ export default class App extends Component {
   getHistoricalCoinPrices = () => {
     fetch("http://localhost:3000/api/v1/cryptos")
       .then(res => res.json())
-      .then(coinData => console.log(coinData))
+      .then(coinData => this.setState({historicalPrices: coinData}))
   }
 
   getCurrentCoinPrices = () => {

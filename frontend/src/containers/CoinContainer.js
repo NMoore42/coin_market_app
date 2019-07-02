@@ -18,6 +18,13 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+function get7DayAvgPrice(props) {
+  let priceArr = props.appState.historicalPrices[props.appState.mainPage]
+  let avgPrice = 0
+  priceArr.forEach(obj => avgPrice += obj.price)
+  return (avgPrice/7).toFixed(2)
+}
+
 function createArticleCards(props) {
   let articles = props.appState.articles[props.appState.mainPage]
   if (articles.length > 4) {
@@ -60,23 +67,23 @@ export default function CoinContainer(props) {
               {props.appState.mainPage} Past Week Performance
               </h1>
             </Box>
-            <CoinChartCard />
+            <CoinChartCard appState={props.appState}/>
           </Paper>
         </Grid>
         <Grid item xs={6}>
           <Paper className={classes.paper}>
-            Price
+            Current Price
             <Box m={-2}>
-              <h2>{props.appState.currentPrices[props.appState.mainPage]}</h2>
+              <h2>${props.appState.currentPrices[props.appState.mainPage]}</h2>
             </Box>
           </Paper>
         </Grid>
         <Grid item xs={6}>
           <Paper className={classes.paper}>
-            Market Cap
+            7 Day Average
             <Box m={-2}>
               <h2>
-              $109,498,405
+              ${get7DayAvgPrice(props)}
               </h2>
             </Box>
           </Paper>
