@@ -13,12 +13,30 @@ export default class Example extends PureComponent {
     return data
   }
 
+  getPortfolio = () => {
+    let data = this.props.appState.historicalPrices
+    let returnArr = []
+    for (let i = 0; i < 7; i ++) {
+      let value = 0
+      for (let key in data) {
+        debugger
+        value += (data[key][i].price * this.props.appState.coins[key])
+      }
+      returnArr.push({day: i, price: value})
+    }
+    return returnArr
+  }
+
+  toggleCharts = () => {
+    return this.props.appState.mainPage === "Charts" ? this.getPortfolio() : this.getCoinPerformance()
+  }
+
   render() {
     return (
       <LineChart
         width={1150}
-        height={300}
-        data={this.getCoinPerformance()}
+        height={250}
+        data={this.toggleCharts()}
         margin={{
           top: 10, right: 30, left: 20, bottom: 5,
         }}

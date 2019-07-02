@@ -33,7 +33,7 @@ export default function ChartsContainer(props) {
             <Box m={-3}>
               <h1>Portfolio Past Week Performance</h1>
             </Box>
-            <CoinChartCard />
+            <CoinChartCard appState={props.appState}/>
           </Paper>
         </Grid>
         <Grid item xs={6}>

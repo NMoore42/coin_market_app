@@ -33,7 +33,7 @@ export default class App extends Component {
         "Stellar": 0,
         "Zcash": 0
       },
-      loggedIn: true,
+      loggedIn: false,
       mainPage: "Portfolio",
       loginPageTab: 0,
       currentPrices: {
