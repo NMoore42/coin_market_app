@@ -1,5 +1,3 @@
-require 'pry'
-
 class Api::V1::UsersController < ApplicationController
   before_action :find_user, only: [:update, :destroy, :show]
 
@@ -25,7 +23,9 @@ class Api::V1::UsersController < ApplicationController
     email = params[:email]
     @user = User.all.find_by(email: email)
     if @user
-      render json: @user
+      @coins = {bitcoin: 32, litecoin: 11}
+      @articles = {}
+      render json: {user: @user, coins: @coins}
     else
       @errors = ["Invalid credentials, please try again"]
       render json: @errors

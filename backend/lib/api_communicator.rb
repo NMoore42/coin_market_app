@@ -36,24 +36,24 @@ class APICall
   #   }
   # end
 
-  # def self.get_data
-  #   data = self.api_call
-  #   returnHash = {
-  #     "BTC" => {"name" => "Bitcoin", "price" => data["BTC"]["quote"]["USD"]["price"], "ticker" => "BTC"},
-  #     "LTC" => {"name" => "Litecoin", "price" => data["LTC"]["quote"]["USD"]["price"], "ticker" => "LTC"},
-  #     "BCH" => {"name" => "Bitcoin Cash", "price" => data["BCH"]["quote"]["USD"]["price"], "ticker" => "BCH"},
-  #     "ZEC" => {"name" => "Zcash", "price" => data["ZEC"]["quote"]["USD"]["price"], "ticker" => "ZEC"},
-  #     "ADA" => {"name" => "Cardano", "price" => data["ADA"]["quote"]["USD"]["price"], "ticker" => "ADA"},
-  #     "XRP" => {"name" => "Ripple", "price" => data["XRP"]["quote"]["USD"]["price"], "ticker" => "XRP"},
-  #     "XLM" => {"name" => "Stellar", "price" => data["XLM"]["quote"]["USD"]["price"], "ticker" => "XLM"},
-  #     "EOS" => {"name" => "EOS", "price" => data["EOS"]["quote"]["USD"]["price"], "ticker" => "EOS"},
-  #     "TRX" => {"name" => "TRON", "price" => data["TRX"]["quote"]["USD"]["price"], "ticker" => "TRX"},
-  #     "ETH" => {"name" => "Ethereum", "price" => data["ETH"]["quote"]["USD"]["price"], "ticker" => "ETH"}
-  #   }
-  # end
+  def self.get_data
+    data = self.api_call
+    returnHash = {
+      "BTC" => {"name" => "Bitcoin", "price" => data["BTC"]["quote"]["USD"]["price"], "ticker" => "BTC"},
+      "LTC" => {"name" => "Litecoin", "price" => data["LTC"]["quote"]["USD"]["price"], "ticker" => "LTC"},
+      "BCH" => {"name" => "Bitcoin Cash", "price" => data["BCH"]["quote"]["USD"]["price"], "ticker" => "BCH"},
+      "ZEC" => {"name" => "Zcash", "price" => data["ZEC"]["quote"]["USD"]["price"], "ticker" => "ZEC"},
+      "ADA" => {"name" => "Cardano", "price" => data["ADA"]["quote"]["USD"]["price"], "ticker" => "ADA"},
+      "XRP" => {"name" => "Ripple", "price" => data["XRP"]["quote"]["USD"]["price"], "ticker" => "XRP"},
+      "XLM" => {"name" => "Stellar", "price" => data["XLM"]["quote"]["USD"]["price"], "ticker" => "XLM"},
+      "EOS" => {"name" => "EOS", "price" => data["EOS"]["quote"]["USD"]["price"], "ticker" => "EOS"},
+      "TRX" => {"name" => "TRON", "price" => data["TRX"]["quote"]["USD"]["price"], "ticker" => "TRX"},
+      "ETH" => {"name" => "Ethereum", "price" => data["ETH"]["quote"]["USD"]["price"], "ticker" => "ETH"}
+    }
+  end
 
 end
 
 
 
-puts APICall.api_call
+puts APICall.get_data

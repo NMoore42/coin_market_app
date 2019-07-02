@@ -24,7 +24,7 @@ export default class App extends Component {
       coins: [],
       loggedIn: false,
       mainPage: "Portfolio",
-      loginPageTab: true,
+      loginPageTab: 0,
       currentPrices: {
         "Bitcoin": 0,
         "Ethereum": 0,
@@ -106,17 +106,7 @@ export default class App extends Component {
         email: this.state.loginEmail,
         password: this.state.loginPassword
       })
-    }).then(res => res.json()).then(res => this.setState({
-      user: res.name,
-      loggedIn: true,
-      mainPage: "Portfolio",
-      userArticles: [],
-      loginEmail: "",
-      loginPassword: "",
-      signUpName: "",
-      signUpEmail: "",
-      signUpPassword: ""
-    }))
+    }).then(res => res.json()).then(res => console.log(res))
   }
 
   validateLoginUser = () => {
@@ -157,10 +147,11 @@ export default class App extends Component {
   }
 
   componentDidMount = () => {
-    // this.getCoinPrices();
+    this.getHistoricalCoinPrices();
+    // this.getCurrentCoinPrices();
     // this.getNewsArticles();
 
-    //this.interval = setInterval(this.getCoinPrices, 60000);
+    //this.interval = setInterval(this.getCurrentCoinPrices, 60000);
     //Remove comment on above when running live demo to live update prices
   }
 
@@ -188,7 +179,13 @@ export default class App extends Component {
     }
   }
 
-  getCoinPrices = () => {
+  getHistoricalCoinPrices = () => {
+    fetch("http://localhost:3000/api/v1/cryptos")
+      .then(res => res.json())
+      .then(coinData => console.log(coinData))
+  }
+
+  getCurrentCoinPrices = () => {
     for (let key in coins) {
       fetch(`https://api.cryptonator.com/api/ticker/${coins[key]}-usd`)
         .then(res => res.json())
