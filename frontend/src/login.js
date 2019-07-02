@@ -25,28 +25,20 @@ const Login = ({ classes, ...props }) => (
     <div className={classes.formContainer}>
       <div className={classes.form}>
         <Tabs
-          value={props.loginPageTab}
-          onChange={props.handleTabChange}
+          value={props.appState.loginPageTab}
           indicatorColor="primary"
           textColor="primary"
           centered
         >
-          <Tab label="Login" onClick={event => props.handleLoginPageTab(true)} classes={{ root: classes.tab }} />
-          <Tab label="New User" onClick={event => props.handleLoginPageTab(false)} classes={{ root: classes.tab }} />
+          <Tab label="Login" onClick={event => props.handleLoginPageTab("login")} classes={{ root: classes.tab }} />
+          <Tab label="New User" onClick={event => props.handleLoginPageTab("signup")} classes={{ root: classes.tab }} />
         </Tabs>
-        {props.loginPageTab && (
+        {!props.appState.loginPageTab && (
           <React.Fragment>
-
-
             <div className={classes.formDividerContainer}>
               <div className={classes.formDivider} />
               <div className={classes.formDivider} />
             </div>
-            <Fade in={props.error}>
-              <Typography color="secondary" className={classes.errorMessage}>
-                Something is wrong with your login or password :(
-              </Typography>
-            </Fade>
             <Box>
               <h4>Welcome!</h4>
             </Box>
@@ -58,10 +50,10 @@ const Login = ({ classes, ...props }) => (
                   input: classes.textField
                 }
               }}
-              value={props.loginValue}
-              onChange={e => props.handleInput(e, "login")}
+              value={props.appState.loginEmail}
+              onChange={event => props.handleLoginChange("loginEmail", event.target.value)}
               margin="normal"
-              placeholder="Email Adress"
+              placeholder="Email Address"
               type="email"
               fullWidth
             />
@@ -73,8 +65,8 @@ const Login = ({ classes, ...props }) => (
                   input: classes.textField
                 }
               }}
-              value={props.passwordValue}
-              onChange={e => props.handleInput(e, "password")}
+              value={props.appState.loginPassword}
+              onChange={event => props.handleLoginChange("loginPassword", event.target.value)}
               margin="normal"
               placeholder="Password"
               type="password"
@@ -84,26 +76,18 @@ const Login = ({ classes, ...props }) => (
 
                 <Button
 
-                  onClick={props.handleLoginButtonClick}
+                  onClick={props.validateLoginUser}
                   variant="contained"
                   color="primary"
                   size="large"
                 >
                   Login
                 </Button>
-
-
             </div>
           </React.Fragment>
         )}
-        {!props.loginPageTab && (
+        {props.appState.loginPageTab && (
           <React.Fragment>
-
-            <Fade in={props.error}>
-              <Typography color="secondary" className={classes.errorMessage}>
-                Something is wrong with your login or password :(
-              </Typography>
-            </Fade>
             <TextField
               id="name"
               InputProps={{
@@ -112,10 +96,10 @@ const Login = ({ classes, ...props }) => (
                   input: classes.textField
                 }
               }}
-              value={props.nameValue}
-              onChange={e => props.handleInput(e, "name")}
+              value={props.appState.signUpName}
+              onChange={event => props.handleLoginChange("signUpName", event.target.value)}
               margin="normal"
-              placeholder="Full Name"
+              placeholder="Username"
               type="email"
               fullWidth
             />
@@ -127,10 +111,10 @@ const Login = ({ classes, ...props }) => (
                   input: classes.textField
                 }
               }}
-              value={props.loginValue}
-              onChange={e => props.handleInput(e, "login")}
+              value={props.appState.signUpEmail}
+              onChange={event => props.handleLoginChange("signUpEmail", event.target.value)}
               margin="normal"
-              placeholder="Email Adress"
+              placeholder="Email Address"
               type="email"
               fullWidth
             />
@@ -142,8 +126,8 @@ const Login = ({ classes, ...props }) => (
                   input: classes.textField
                 }
               }}
-              value={props.passwordValue}
-              onChange={e => props.handleInput(e, "password")}
+              value={props.appState.signUpPassword}
+              onChange={event => props.handleLoginChange("signUpPassword", event.target.value)}
               margin="normal"
               placeholder="Password"
               type="password"
@@ -152,7 +136,7 @@ const Login = ({ classes, ...props }) => (
             <div className={classes.creatingButtonContainer}>
 
                 <Button
-                  onClick={props.handleLoginButtonClick}
+                  onClick={props.validateSignUpUser}
 
                   size="large"
                   variant="contained"

@@ -1,3 +1,5 @@
+require 'pry'
+
 class Api::V1::UsersController < ApplicationController
   before_action :find_user, only: [:update, :destroy, :show]
 
@@ -19,6 +21,17 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
+  def login
+    email = params[:email]
+    @user = User.all.find_by(email: email)
+    if @user
+      render json: @user
+    else
+      @errors = ["Invalid credentials, please try again"]
+      render json: @errors
+    end
+  end
+
   def show
     render json: @user
   end
@@ -33,6 +46,8 @@ class Api::V1::UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :email, :password)
   end
+
+
 
   def find_user
     @user = User.find(params[:id])

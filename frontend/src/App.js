@@ -20,7 +20,7 @@ export default class App extends Component {
   constructor() {
     super()
     this.state = {
-      user: "Nick",
+      user: "",
       coins: [],
       loggedIn: false,
       mainPage: "Portfolio",
@@ -50,6 +50,11 @@ export default class App extends Component {
         "ZCash": []
       },
       userArticles: [],
+      loginEmail: "",
+      loginPassword: "",
+      signUpName: "",
+      signUpEmail: "",
+      signUpPassword: ""
     }
   }
 
@@ -79,16 +84,81 @@ export default class App extends Component {
     })
   }
 
-  handleLoginPageTab = (clicked) => {
-    if (clicked !== this.state.loginPageTab)
+  handleLoginPageTab = (tab) => {
+    if (tab === "login")
     this.setState({
-      loginPageTab: !this.state.loginPageTab
+      loginPageTab: 0
+    })
+    if (tab === "signup")
+    this.setState({
+      loginPageTab: 1
     })
   }
 
+  loginUser = () => {
+    fetch("http://localhost:3000/api/v1/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accepts": "application/json"
+      },
+      body: JSON.stringify({
+        email: this.state.loginEmail,
+        password: this.state.loginPassword
+      })
+    }).then(res => res.json()).then(res => this.setState({
+      user: res.name,
+      loggedIn: true,
+      mainPage: "Portfolio",
+      userArticles: [],
+      loginEmail: "",
+      loginPassword: "",
+      signUpName: "",
+      signUpEmail: "",
+      signUpPassword: ""
+    }))
+  }
+
+  validateLoginUser = () => {
+    if (this.state.loginEmail && this.state.loginPassword) {
+      this.loginUser()
+    } else {
+      alert("Please fill out all areas of Login Form!")
+    }
+  }
+
+  handleLoginChange = (input, value) => {
+    this.setState({
+      [input]: value
+    })
+  }
+
+  validateSignUpUser = () => {
+    if (this.state.signUpName && this.state.signUpEmail && this.state.signUpPassword) {
+      this.signUpUser()
+    } else {
+      alert("Please fill out all areas of New User Form!")
+    }
+  }
+
+  signUpUser = () => {
+    fetch("http://localhost:3000/api/v1/users", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accepts": "application/json"
+      },
+      body: JSON.stringify({
+        name: this.state.signUpName,
+        email: this.state.signUpEmail,
+        password: this.state.signUpPassword
+      })
+    }).then(res => res.json()).then(res => this.loginUser())
+  }
+
   componentDidMount = () => {
-    //this.getCoinPrices();
-    //this.getNewsArticles();
+    // this.getCoinPrices();
+    // this.getNewsArticles();
 
     //this.interval = setInterval(this.getCoinPrices, 60000);
     //Remove comment on above when running live demo to live update prices
@@ -142,8 +212,11 @@ export default class App extends Component {
       />
     :
       <Login
-        loginPageTab={this.state.loginPageTab}
         handleLoginPageTab={this.handleLoginPageTab}
+        handleLoginChange={this.handleLoginChange}
+        appState={this.state}
+        validateSignUpUser={this.validateSignUpUser}
+        validateLoginUser={this.validateLoginUser}
       />
   }
 

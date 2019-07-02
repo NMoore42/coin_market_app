@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       resources :transactions, only: [:create, :index]
       resources :cryptos, only: [:create, :index]
       resources :articles, only: [:create, :index, :destroy]
+      post '/login', to: 'users#login', as: 'login'
     end
   end
 end
