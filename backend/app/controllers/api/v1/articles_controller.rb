@@ -1,5 +1,5 @@
 class Api::V1::ArticlesController < ApplicationController
-  before_action :find_article, only: [:destroy]
+
 
   def create
     @article = Article.new(article_params)
@@ -15,7 +15,8 @@ class Api::V1::ArticlesController < ApplicationController
     render json: @articles
   end
 
-  def destroy
+  def remove
+    @article = User.get_article(params[:user_id], params[:url])
     @article.destroy
     render json: @article
   end
@@ -24,11 +25,8 @@ class Api::V1::ArticlesController < ApplicationController
   private
 
   def article_params
-    params.require(:article).permit(:user_id, :title, :content)
+    params.require(:article).permit(:user_id, :title, :url, :coin)
   end
 
-  def find_article
-    @article = Article.find(params[:id])
-  end
 
 end

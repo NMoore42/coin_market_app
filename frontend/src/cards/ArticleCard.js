@@ -27,9 +27,9 @@ const coins = {
   "Bitcoin Cash": bch_icon,
   "EOS": eos_icon,
   "Cardano": ada_icon,
-  "Tron": trx_icon,
+  "TRON": trx_icon,
   "Stellar": xlm_icon,
-  "ZCash": trx_icon
+  "Zcash": zec_icon
 }
 
 const useStyles = makeStyles({
@@ -73,7 +73,7 @@ export default function MediaCard(props) {
       <CardActionArea onClick={event => openURL(props.articleData.url)}>
         <CardContent>
           <Box m={1}>
-            <img src={coins[props.coinImg]} alt="" />
+            <img src={coins[props.coin]} alt="" />
           </Box>
           <Typography variant="body2" color="textSecondary" component="p">
             {props.articleData.title.slice(0,65) + "..."}

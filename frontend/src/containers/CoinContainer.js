@@ -32,7 +32,7 @@ function createArticleCards(props) {
       <Grid key={uuid.v4()} item>
         <ArticleCard
           appState={props.appState}
-          coinImg={props.appState.mainPage}
+          coin={props.appState.mainPage}
           handleArticleSave={props.handleArticleSave}
           articleData={article}
         />
@@ -43,7 +43,7 @@ function createArticleCards(props) {
       <Grid key={uuid.v4()} item>
         <ArticleCard
           appState={props.appState}
-          coinImg={props.appState.mainPage}
+          coin={props.appState.mainPage}
           handleArticleSave={props.handleArticleSave}
           articleData={article}
         />

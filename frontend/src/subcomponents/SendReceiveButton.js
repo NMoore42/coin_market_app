@@ -22,31 +22,21 @@ const useStyles = makeStyles(theme => ({
 
 const currencies = [
   {
-    value: 'none',
+    value: 0,
     label: '',
   },
   {
-    value: 'add',
+    value: 1,
     label: 'Add',
   },
   {
-    value: 'remove',
+    value: -1,
     label: 'Remove',
   }
 ];
 
-export default function TextFields() {
+export default function TextFields(props) {
   const classes = useStyles();
-  const [values, setValues] = React.useState({
-    name: 'Cat in the Hat',
-    age: '',
-    multiline: 'Controlled',
-    currency: 'EUR',
-  });
-
-  const handleChange = name => event => {
-    setValues({ ...values, [name]: event.target.value });
-  };
 
   return (
     <form className={classes.container} noValidate autoComplete="off">
@@ -56,8 +46,8 @@ export default function TextFields() {
         select
         label="Transaction"
         className={classes.textField}
-        value={values.currency}
-        onChange={handleChange('currency')}
+        value={props.appState.newTransType}
+        onChange={event => props.handleInputChange("newTransType", parseInt(event.target.value))}
         SelectProps={{
           native: true,
           MenuProps: {

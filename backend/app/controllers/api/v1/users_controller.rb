@@ -24,8 +24,9 @@ class Api::V1::UsersController < ApplicationController
     @user = User.all.find_by(email: email)
     if @user
       @coins = Transaction.get_user_coins(@user.id)
-      @articles = {}
-      render json: {user: @user, coins: @coins}
+      @transactions = @user.transactions.reverse
+      @articles = @user.articles
+      render json: {user: @user, coins: @coins, transactions: @transactions, articles: @articles}
     else
       @errors = ["Invalid credentials, please try again"]
       render json: @errors

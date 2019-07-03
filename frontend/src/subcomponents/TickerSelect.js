@@ -20,65 +20,60 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const currencies = [
-  {
-    label: '',
-    value: 'none',
-  },
-  {
-    label: 'Bitcoin',
-    value: 'bitcoin',
-  },
-  {
-    label: 'Ethereum',
-    value: 'ethereum',
-  },
-  {
-    label: 'Ripple',
-    value: 'ripple',
-  },
-  {
-    label: 'Litecoin',
-    value: 'litecoin',
-  },
-  {
-    label: 'Bitcoin Cash',
-    value: 'bitcoin cash',
-  },
-  {
-    label: 'EOS',
-    value: 'eos',
-  },
-  {
-    label: 'Cardano',
-    value: 'cardano',
-  },
-  {
-    label: 'Tron',
-    value: 'tron',
-  },
-  {
-    label: 'Stellar',
-    value: 'stellar',
-  },
-  {
-    label: 'ZCash',
-    value: 'zcash',
-  }
-];
+function currencies(props) {
+  const currencies = [
+    {
+      label: '',
+      value: null,
+    },
+    {
+      label: 'Bitcoin',
+      value: 'Bitcoin',
+    },
+    {
+      label: 'Ethereum',
+      value: 'Ethereum',
+    },
+    {
+      label: 'Ripple',
+      value: 'Ripple',
+    },
+    {
+      label: 'Litecoin',
+      value: 'Litecoin',
+    },
+    {
+      label: 'Bitcoin Cash',
+      value: 'Bitcoin Cash',
+    },
+    {
+      label: 'EOS',
+      value: 'EOS',
+    },
+    {
+      label: 'Cardano',
+      value: 'Cardano',
+    },
+    {
+      label: 'TRON',
+      value: 'TRON',
+    },
+    {
+      label: 'Stellar',
+      value: 'Stellar',
+    },
+    {
+      label: 'Zcash',
+      value: 'Zcash',
+    }
+  ];
+  return currencies;
+}
 
-export default function TickerSelect() {
+
+
+export default function TickerSelect(props) {
   const classes = useStyles();
-  const [values, setValues] = React.useState({
-    name: 'Cat in the Hat',
-    age: '',
-    multiline: 'Controlled',
-    currency: 'EUR',
-  });
-
-  const handleChange = name => event => {
-    setValues({ ...values, [name]: event.target.value });
-  };
 
   return (
     <form className={classes.container} noValidate autoComplete="off">
@@ -88,8 +83,8 @@ export default function TickerSelect() {
         select
         label="Transaction"
         className={classes.textField}
-        value={values.currency}
-        onChange={handleChange('currency')}
+        value={props.appState.newTransCrypto}
+        onChange={event => props.handleInputChange("newTransCrypto", event.target.value)}
         SelectProps={{
           native: true,
           MenuProps: {
@@ -98,7 +93,7 @@ export default function TickerSelect() {
         }}
         margin="normal"
       >
-        {currencies.map(option => (
+        {currencies(props).map(option => (
           <option key={option.value} value={option.value}>
             {option.label}
           </option>

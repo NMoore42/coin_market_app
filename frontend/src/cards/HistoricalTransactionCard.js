@@ -17,7 +17,7 @@ export default function HistoricalTransactionCard(props) {
     <div>
       <Paper className={classes.root}>
         <Typography style={{color: props.color}} component="p">
-          {props.sign} 1.889586 {props.coin}
+          {props.sign} {props.quantity} {props.coin}
         </Typography>
       </Paper>
     </div>

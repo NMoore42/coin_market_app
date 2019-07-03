@@ -20,18 +20,9 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function TextFields() {
+export default function TextFields(props) {
   const classes = useStyles();
-  const [values, setValues] = React.useState({
-    name: 'Cat in the Hat',
-    age: '',
-    multiline: 'Controlled',
-    currency: 'EUR',
-  });
 
-  const handleChange = name => event => {
-    setValues({ ...values, [name]: event.target.value });
-  };
 
   return (
     <form className={classes.container} noValidate autoComplete="off">
@@ -39,8 +30,8 @@ export default function TextFields() {
       <TextField
         id="standard-number"
         label="Quantity"
-        value={values.age}
-        onChange={handleChange('age')}
+        value={props.appState.newTransQuantity}
+        onChange={event => props.handleInputChange("newTransQuantity", parseFloat(event.target.value))}
         type="number"
         className={classes.textField}
         InputLabelProps={{

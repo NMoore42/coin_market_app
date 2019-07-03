@@ -21,6 +21,11 @@ export default class App extends Component {
     super()
     this.state = {
       user: "",
+      userId: "",
+      transactions: [],
+      newTransCrypto: "",
+      newTransQuantity: "",
+      newTransType: "",
       coins: {
         "Bitcoin": 0,
         "Ethereum": 0,
@@ -81,30 +86,44 @@ export default class App extends Component {
     }
   }
 
-  logIn = () => {
-    this.setState({
-      loggedIn: !this.state.loggedIn
-    })
-  }
-
   handleMenuClick = (text) => {
     this.setState({
       mainPage: text
     })
   }
 
-  handleArticleSave = (articleData, coinImgKey) => {
-    articleData.coinImg = coinImgKey;
-    this.setState({
-      userArticles: [...this.state.userArticles, articleData]
-    })
+  handleArticleSave = (articleData, coinKey) => {
+    fetch("http://localhost:3000/api/v1/articles", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accepts": "application/json"
+      },
+      body: JSON.stringify({
+        user_id: this.state.userId,
+        title: articleData.title,
+        url: articleData.url,
+        coin: coinKey
+      })
+    }).then(res => res.json()).then(res => this.setState({userArticles: [...this.state.userArticles, res]}))
   }
 
   handleArticleRemove = (articleData, coinImgKey) => {
-    articleData.coinImg = coinImgKey;
-    this.setState({
-      userArticles: this.state.userArticles.filter(art => art !== articleData)
-    })
+    fetch("http://localhost:3000/api/v1/articlesdelete", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accepts": "application/json"
+      },
+      body: JSON.stringify({
+        user_id: this.state.userId,
+        url: articleData.url
+      })
+    }).then(res => res.json())
+      .then(res => this.setState({
+        userArticles: this.state.userArticles.filter(art => art.url !== res.url)
+      })
+    )
   }
 
   handleLoginPageTab = (tab) => {
@@ -115,6 +134,42 @@ export default class App extends Component {
     if (tab === "signup")
     this.setState({
       loginPageTab: 1
+    })
+  }
+
+  handleNewTransactionSubmit = () => {
+    if (this.state.newTransType && this.state.newTransCrypto && this.state.newTransQuantity) {
+      this.createNewTransaction()
+    } else {
+      alert("Please fill out all input areas of form to complete transaction")
+    }
+  }
+
+  createNewTransaction = () => {
+    const coinSelect = this.state.historicalPrices
+    fetch("http://localhost:3000/api/v1/transactions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accepts": "application/json"
+      },
+      body: JSON.stringify({
+        user_id: this.state.userId,
+        crypto_id: coinSelect[this.state.newTransCrypto][coinSelect[this.state.newTransCrypto].length-1].id,
+        quantity: (this.state.newTransQuantity * this.state.newTransType),
+        coin: this.state.newTransCrypto
+      })
+    }).then(res => res.json()).then(res => {
+      let newTrans = [res, ...this.state.transactions]
+      let newCoins = Object.assign({}, this.state.coins)
+      newCoins[this.state.newTransCrypto] += (this.state.newTransQuantity * this.state.newTransType)
+      this.setState({
+      transactions: newTrans,
+      coins: newCoins,
+      newTransCrypto: "",
+      newTransQuantity: "",
+      newTransType: ""
+    })
     })
   }
 
@@ -137,7 +192,10 @@ export default class App extends Component {
       this.setState({
       loggedIn: true,
       user: res.user.name,
-      coins: newCoins
+      coins: newCoins,
+      userId: res.user.id,
+      transactions: res.transactions,
+      userArticles: res.articles
     })
     })
   }
@@ -150,7 +208,7 @@ export default class App extends Component {
     }
   }
 
-  handleLoginChange = (input, value) => {
+  handleInputChange = (input, value) => {
     this.setState({
       [input]: value
     })
@@ -238,12 +296,14 @@ export default class App extends Component {
         handleMenuClick={this.handleMenuClick}
         handleArticleSave={this.handleArticleSave}
         handleArticleRemove={this.handleArticleRemove}
+        handleNewTransactionSubmit={this.handleNewTransactionSubmit}
+        handleInputChange={this.handleInputChange}
         appState={this.state}
       />
     :
       <Login
         handleLoginPageTab={this.handleLoginPageTab}
-        handleLoginChange={this.handleLoginChange}
+        handleInputChange={this.handleInputChange}
         appState={this.state}
         validateSignUpUser={this.validateSignUpUser}
         validateLoginUser={this.validateLoginUser}

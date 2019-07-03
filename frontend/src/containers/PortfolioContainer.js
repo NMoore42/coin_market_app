@@ -52,7 +52,10 @@ export default function CoinContainer(props) {
             <Box m={-3}>
               <h4>New Transactions</h4>
             </Box>
-            <NewTransactionCard />
+            <NewTransactionCard
+              appState={props.appState}
+              handleNewTransactionSubmit={props.handleNewTransactionSubmit}
+              handleInputChange={props.handleInputChange}/>
           </Paper>
         </Grid>
         <Grid item xs={6}>
@@ -61,7 +64,7 @@ export default function CoinContainer(props) {
               <h4>Recent Transactions</h4>
             </Box>
             <br></br>
-            <HistoricalTransactionContainer />
+            <HistoricalTransactionContainer appState={props.appState}/>
           </Paper>
         </Grid>
       </Grid>

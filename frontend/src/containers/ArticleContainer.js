@@ -25,7 +25,7 @@ function createArticleCards(props) {
       <Grid key={uuid.v4()}item>
         <ArticleCard
           appState={props.appState}
-          coinImg={article.coinImg}
+          coin={article.coin}
           handleArticleRemove={props.handleArticleRemove}
           articleData={article}
         />

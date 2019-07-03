@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_26_183249) do
+ActiveRecord::Schema.define(version: 2019_07_03_184126) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,9 +18,10 @@ ActiveRecord::Schema.define(version: 2019_06_26_183249) do
   create_table "articles", force: :cascade do |t|
     t.integer "user_id"
     t.string "title"
-    t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "coin"
+    t.string "url"
   end
 
   create_table "cryptos", force: :cascade do |t|
@@ -35,6 +36,7 @@ ActiveRecord::Schema.define(version: 2019_06_26_183249) do
     t.integer "user_id"
     t.integer "crypto_id"
     t.float "quantity"
+    t.string "coin"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -51,7 +51,7 @@ const Login = ({ classes, ...props }) => (
                 }
               }}
               value={props.appState.loginEmail}
-              onChange={event => props.handleLoginChange("loginEmail", event.target.value)}
+              onChange={event => props.handleInputChange("loginEmail", event.target.value)}
               margin="normal"
               placeholder="Email Address"
               type="email"
@@ -66,7 +66,7 @@ const Login = ({ classes, ...props }) => (
                 }
               }}
               value={props.appState.loginPassword}
-              onChange={event => props.handleLoginChange("loginPassword", event.target.value)}
+              onChange={event => props.handleInputChange("loginPassword", event.target.value)}
               margin="normal"
               placeholder="Password"
               type="password"
@@ -97,7 +97,7 @@ const Login = ({ classes, ...props }) => (
                 }
               }}
               value={props.appState.signUpName}
-              onChange={event => props.handleLoginChange("signUpName", event.target.value)}
+              onChange={event => props.handleInputChange("signUpName", event.target.value)}
               margin="normal"
               placeholder="Username"
               type="email"
@@ -112,7 +112,7 @@ const Login = ({ classes, ...props }) => (
                 }
               }}
               value={props.appState.signUpEmail}
-              onChange={event => props.handleLoginChange("signUpEmail", event.target.value)}
+              onChange={event => props.handleInputChange("signUpEmail", event.target.value)}
               margin="normal"
               placeholder="Email Address"
               type="email"
@@ -127,7 +127,7 @@ const Login = ({ classes, ...props }) => (
                 }
               }}
               value={props.appState.signUpPassword}
-              onChange={event => props.handleLoginChange("signUpPassword", event.target.value)}
+              onChange={event => props.handleInputChange("signUpPassword", event.target.value)}
               margin="normal"
               placeholder="Password"
               type="password"

@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function NewTransactionCard() {
+export default function NewTransactionCard(props) {
   const classes = useStyles();
 
   return (
@@ -27,26 +27,26 @@ export default function NewTransactionCard() {
       <Grid container spacing={4}>
         <Grid item xs>
           <Box m={1}>
-            <SendReceiveButton />
+            <SendReceiveButton appState={props.appState} handleInputChange={props.handleInputChange}/>
           </Box>
         </Grid>
         <Grid item xs>
           <Box m={1}>
-            <QuantityInput />
+            <QuantityInput appState={props.appState} handleInputChange={props.handleInputChange}/>
           </Box>
         </Grid>
       </Grid>
       <Grid container spacing={1}>
         <Grid item xs>
           <Box m={1}>
-            <TickerSelect />
+            <TickerSelect appState={props.appState} handleInputChange={props.handleInputChange}/>
           </Box>
         </Grid>
       </Grid>
       <Grid container spacing={1}>
         <Grid item xs>
           <Box m={3.1}>
-            <SubmitButton />
+            <SubmitButton handleNewTransactionSubmit={props.handleNewTransactionSubmit}/>
           </Box>
         </Grid>
       </Grid>

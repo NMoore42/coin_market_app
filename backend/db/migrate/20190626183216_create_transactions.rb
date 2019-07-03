@@ -4,6 +4,7 @@ class CreateTransactions < ActiveRecord::Migration[5.2]
       t.integer :user_id
       t.integer :crypto_id
       t.float :quantity
+      t.string :coin
 
       t.timestamps
     end

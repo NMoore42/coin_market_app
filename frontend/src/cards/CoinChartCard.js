@@ -19,7 +19,6 @@ export default class Example extends PureComponent {
     for (let i = 0; i < 7; i ++) {
       let value = 0
       for (let key in data) {
-        debugger
         value += (data[key][i].price * this.props.appState.coins[key])
       }
       returnArr.push({day: i, price: value})

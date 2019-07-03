@@ -123,7 +123,10 @@ export default function Main(props) {
   function renderSwitch(param) {
     switch(param) {
       case 'Portfolio':
-        return <PortfolioContainer appState={props.appState}/>
+        return <PortfolioContainer 
+          appState={props.appState}
+          handleNewTransactionSubmit={props.handleNewTransactionSubmit}
+          handleInputChange={props.handleInputChange}/>
       case 'Charts':
         return <ChartsContainer appState={props.appState} />
       case 'Articles':
