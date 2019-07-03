@@ -239,7 +239,7 @@ export default class App extends Component {
 
   componentDidMount = () => {
     this.getHistoricalCoinPrices();
-    // this.getCurrentCoinPrices();
+    this.getCurrentCoinPrices();
     // this.getNewsArticles();
 
     //this.interval = setInterval(this.getCurrentCoinPrices, 60000);

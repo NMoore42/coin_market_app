@@ -1,18 +1,22 @@
 import React, { PureComponent } from 'react';
 import { PieChart, Pie, Sector } from 'recharts';
 
-const data = [
-  {name: 'BTC', value: 2400},
-  {name: 'ETH', value: 1398},
-  {name: 'XRP', value: 5800},
-  {name: 'LTC', value: 3908},
-  {name: 'BCH', value: 4800},
-  {name: 'EOS', value: 3800},
-  {name: 'ADA', value: 3800},
-  {name: 'TRX', value: 3800},
-  {name: 'XLM', value: 3800},
-  {name: 'ZEC', value: 4300}
-];
+const data = (props) => {
+  const coin = props.appState.coins
+  const price = props.appState.currentPrices
+  return [
+    {name: 'BTC', value: coin["Bitcoin"] * price["Bitcoin"]},
+    {name: 'ETH', value: coin["Ethereum"] * price["Ethereum"]},
+    {name: 'XRP', value: coin["Ripple"] * price["Ripple"]},
+    {name: 'LTC', value: coin["Litecoin"] * price["Litecoin"]},
+    {name: 'BCH', value: coin["Bitcoin Cash"] * price["Bitcoin Cash"]},
+    {name: 'EOS', value: coin["EOS"] * price["EOS"]},
+    {name: 'ADA', value: coin["Cardano"] * price["Cardano"]},
+    {name: 'TRX', value: coin["TRON"] * price["TRON"]},
+    {name: 'XLM', value: coin["Stellar"] * price["Stellar"]},
+    {name: 'ZEC', value: coin["Zcash"] * price["Zcash"]}
+  ];
+}
 
 const renderActiveShape = (props) => {
   const RADIAN = Math.PI / 180;
@@ -53,9 +57,8 @@ const renderActiveShape = (props) => {
       />
       <path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke={fill} fill="none" />
       <circle cx={ex} cy={ey} r={2} fill={fill} stroke="none" />
-      <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="#333">{`PV ${value}`}</text>
       <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} dy={18} textAnchor={textAnchor} fill="#999">
-        {`(Rate ${(percent * 100).toFixed(2)}%)`}
+        {`(${(percent * 100).toFixed(2)}% of Portfolio)`}
       </text>
     </g>
   );
@@ -81,7 +84,7 @@ export default class PortfolioPieCard extends PureComponent {
         <Pie
           activeIndex={this.state.activeIndex}
           activeShape={renderActiveShape}
-          data={data}
+          data={data(this.props)}
           cx={275}
           cy={150}
           innerRadius={60}

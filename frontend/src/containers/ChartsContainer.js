@@ -39,18 +39,18 @@ export default function ChartsContainer(props) {
         <Grid item xs={6}>
           <Paper className={classes.paper}>
             <Box m={-3}>
-              <h4>Currency Holdings</h4>
+              <h4>Portfolio Makeup</h4>
             </Box>
-            <PortfolioPieCard />
+            <PortfolioPieCard appState={props.appState}/>
           </Paper>
         </Grid>
         <Grid item xs={6}>
           <Paper className={classes.paper}>
             <Box m={-3}>
-              <h4>Currency Holdings</h4>
+              <h4>Portfolio Holdings</h4>
             </Box>
             <br></br>
-            <PortfolioBarCard />
+            <PortfolioBarCard appState={props.appState}/>
           </Paper>
         </Grid>
       </Grid>

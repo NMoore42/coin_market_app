@@ -3,50 +3,30 @@ import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
 
-const data = [
-  {name: 'BTC', uv: 4000, pv: 2400, amt: 2400},
-  {name: 'ETH', uv: 3000, pv: 1398, amt: 2210},
-  {name: 'XRP', uv: 2000, pv: 5800, amt: 2290},
-  {name: 'LTC', uv: 2780, pv: 3908, amt: 2000},
-  {name: 'BCH', uv: 1890, pv: 4800, amt: 2181},
-  {name: 'EOS', uv: 2390, pv: 3800, amt: 2500},
-  {name: 'ADA', uv: 2390, pv: 3800, amt: 2500},
-  {name: 'TRX', uv: 2390, pv: 3800, amt: 2500},
-  {name: 'XLM', uv: 2390, pv: 3800, amt: 2500},
-  {name: 'ZEC', uv: 3490, pv: 4300, amt: 2100}
-];
-
-
-const getIntroOfPage = (label) => {
-  if (label === 'BTC') {
-    return "Quantiy: 2.24";
-  } if (label === 'ETH') {
-    return "Quantiy: 11";
-  } if (label === 'XRP') {
-    return "Quantiy: 6";
-  } if (label === 'LTC') {
-    return "Quantiy: 22";
-  } if (label === 'BCH') {
-    return "Quantiy: 7";
-  } if (label === 'EOS') {
-    return "Quantiy: 23";
-  } if (label === 'ADA') {
-    return "Quantiy: 4";
-  } if (label === 'TRX') {
-    return "Quantiy: 12";
-  } if (label === 'XLM') {
-    return "Quantiy: 122";
-  } if (label === 'ZEC') {
-    return "Quantiy: 24";
-  }
-};
+const data = (props) => {
+  const coin = props.appState.coins
+  const price = props.appState.currentPrices
+  return [
+    {name: 'BTC', uv: 4000, pv: coin["Bitcoin"] * price["Bitcoin"], amt: coin["Bitcoin"]},
+    {name: 'ETH', uv: 3000, pv: coin["Ethereum"] * price["Ethereum"], amt: coin["Ethereum"]},
+    {name: 'XRP', uv: 2000, pv: coin["Ripple"] * price["Ripple"], amt: coin["Ripple"]},
+    {name: 'LTC', uv: 2780, pv: coin["Litecoin"] * price["Litecoin"], amt: coin["Litecoin"]},
+    {name: 'BCH', uv: 1890, pv: coin["Bitcoin Cash"] * price["Bitcoin Cash"], amt: coin["Bitcoin Cash"]},
+    {name: 'EOS', uv: 2390, pv: coin["EOS"] * price["EOS"], amt: coin["EOS"]},
+    {name: 'ADA', uv: 2390, pv: coin["Cardano"] * price["Cardano"], amt: coin["Cardano"]},
+    {name: 'TRX', uv: 2390, pv: coin["TRON"] * price["TRON"], amt: coin["TRON"]},
+    {name: 'XLM', uv: 2390, pv: coin["Stellar"] * price["Stellar"], amt: coin["Stellar"]},
+    {name: 'ZEC', uv: 3490, pv: coin["Zcash"] * price["Zcash"], amt: coin["Zcash"]}
+  ];
+}
 
 const CustomTooltip = ({ active, payload, label }) => {
   if (active) {
+
     return (
       <div className="custom-tooltip">
-        <p className="label">{`${label} : $${payload[0].value}`}</p>
-        <p className="intro">{getIntroOfPage(label)}</p>
+        <p className="label">{`${label} : $${payload[0].value.toFixed(2)}`}</p>
+        <p className="intro">{`Quantity: ${payload[0].payload.amt.toFixed(4)}`}</p>
       </div>
     );
   }
@@ -62,7 +42,7 @@ export default class PortfolioBarCard extends PureComponent {
       <BarChart
         width={500}
         height={275}
-        data={data}
+        data={data(this.props)}
         margin={{
           top: 5, right: 30, left: 20, bottom: 5,
         }}
