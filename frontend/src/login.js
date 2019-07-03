@@ -33,7 +33,7 @@ const Login = ({ classes, ...props }) => (
           <Tab label="Login" onClick={event => props.handleLoginPageTab("login")} classes={{ root: classes.tab }} />
           <Tab label="New User" onClick={event => props.handleLoginPageTab("signup")} classes={{ root: classes.tab }} />
         </Tabs>
-        {!props.appState.loginPageTab && (
+        {props.appState.loginPageTab === 0 && (
           <React.Fragment>
             <div className={classes.formDividerContainer}>
               <div className={classes.formDivider} />
@@ -86,7 +86,7 @@ const Login = ({ classes, ...props }) => (
             </div>
           </React.Fragment>
         )}
-        {props.appState.loginPageTab && (
+        {props.appState.loginPageTab === 1 && (
           <React.Fragment>
             <TextField
               id="name"
