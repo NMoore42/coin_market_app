@@ -15,7 +15,7 @@ const data = (props) => {
     {name: 'TRX', value: coin["TRON"] * price["TRON"]},
     {name: 'XLM', value: coin["Stellar"] * price["Stellar"]},
     {name: 'ZEC', value: coin["Zcash"] * price["Zcash"]}
-  ];
+  ].sort((objA, objB) => objA.value - objB.value);
 }
 
 const renderActiveShape = (props) => {
