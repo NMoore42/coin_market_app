@@ -21,6 +21,10 @@ export default class App extends Component {
     super()
     this.state = {
       user: "",
+      deleteProfile: false,
+      userMember: "",
+      email: "",
+      password: "",
       userId: "",
       transactions: [],
       newTransCrypto: "",
@@ -195,7 +199,15 @@ export default class App extends Component {
       coins: newCoins,
       userId: res.user.id,
       transactions: res.transactions,
-      userArticles: res.articles
+      userArticles: res.articles,
+      email: res.user.email,
+      password: res.user.password,
+      userMember: res.user.created_at,
+      signUpName: "",
+      signUpPassword: "",
+      signUpEmail: "",
+      loginPassword: "",
+      loginEmail: ""
     })
     })
   }
@@ -206,6 +218,45 @@ export default class App extends Component {
     } else {
       alert("Please fill out all areas of Login Form!")
     }
+  }
+
+  handleDeleteProfile = () => {
+    fetch(`http://localhost:3000/api/v1/users/${this.state.userId}`)
+      .then(res => res.json())
+      .then(res => this.setState({
+        user: "",
+        deleteProfile: false,
+        userMember: "",
+        email: "",
+        password: "",
+        userId: "",
+        transactions: [],
+        newTransCrypto: "",
+        newTransQuantity: "",
+        newTransType: "",
+        coins: {
+          "Bitcoin": 0,
+          "Ethereum": 0,
+          "Ripple": 0,
+          "Litecoin": 0,
+          "Bitcoin Cash": 0,
+          "EOS": 0,
+          "Cardano": 0,
+          "TRON": 0,
+          "Stellar": 0,
+          "Zcash": 0
+        },
+        loggedIn: false,
+        mainPage: "Portfolio",
+        loginPageTab: 0,
+        userArticles: [],
+        loginEmail: "",
+        loginPassword: "",
+        signUpName: "",
+        signUpEmail: "",
+        signUpPassword: ""
+      })
+    )
   }
 
   handleInputChange = (input, value) => {
@@ -234,8 +285,31 @@ export default class App extends Component {
         email: this.state.signUpEmail,
         password: this.state.signUpPassword
       })
-    }).then(res => res.json()).then(res => this.loginUser())
+    }).then(res => res.json())
+    .then(res => {
+        let newCoins = Object.assign({}, this.state.coins)
+        for (let key in res.coins) {
+          newCoins[key] = res.coins[key]
+        }
+        this.setState({
+        loggedIn: true,
+        user: res.user.name,
+        coins: newCoins,
+        userId: res.user.id,
+        transactions: res.transactions,
+        userArticles: res.articles,
+        email: res.user.email,
+        password: res.user.password,
+        userMember: res.user.created_at,
+        signUpName: "",
+        signUpPassword: "",
+        signUpEmail: "",
+        loginPassword: "",
+        loginEmail: ""
+      })
+    })
   }
+
 
   componentDidMount = () => {
     this.getHistoricalCoinPrices();
@@ -297,6 +371,7 @@ export default class App extends Component {
         handleArticleSave={this.handleArticleSave}
         handleArticleRemove={this.handleArticleRemove}
         handleNewTransactionSubmit={this.handleNewTransactionSubmit}
+        handleDeleteProfile={this.handleDeleteProfile}
         handleInputChange={this.handleInputChange}
         appState={this.state}
       />

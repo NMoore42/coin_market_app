@@ -8,6 +8,8 @@ import Button from '@material-ui/core/Button';
 import ArticleCard from '../cards/ArticleCard';
 import UpdateProfileButton from '../subcomponents/UpdateProfileButton'
 import DeleteProfileButton from '../subcomponents/DeleteProfileButton'
+import CancelDeleteProfileButton from '../subcomponents/CancelDeleteProfileButton'
+import ConfirmDeleteProfileButton from '../subcomponents/ConfirmDeleteProfileButton'
 import logo from '../images/logo.png'
 import uuid from 'uuid'
 
@@ -23,6 +25,27 @@ const useStyles = makeStyles(theme => ({
 
   },
 }));
+
+function showDeleteProfile(props, classes) {
+  if (!props.appState.deleteProfile) {
+    return <div>
+      <Box container m={3}>
+        <Grid container m={3} justify="center" spacing={1}>
+          <DeleteProfileButton handleInputChange={props.handleInputChange}/>
+        </Grid>
+      </Box>
+    </div>
+  } else {
+    return <div>
+      <Box container m={3}>
+        <Grid container m={3} justify="center" spacing={1}>
+          <ConfirmDeleteProfileButton handleDeleteProfile={props.handleDeleteProfile}/>
+          <CancelDeleteProfileButton handleInputChange={props.handleInputChange}/>
+        </Grid>
+      </Box>
+    </div>
+  }
+}
 
 export default function ProfileContainer(props) {
   const classes = useStyles();
@@ -40,17 +63,12 @@ export default function ProfileContainer(props) {
             <Container maxWidth="sm">
               <Paper className={classes.paper}>
               <img src={logo} width={1406/3} height={886/3} alt="" />
-              <h2>Name: </h2>
-              <h2>Email: </h2>
-              <h2>Password: </h2>
+              <h2>Name: {props.appState.user}</h2>
+              <h2>Email: {props.appState.email}</h2>
+              <h2>Member Since: {props.appState.userMember.slice(0,10)}</h2>
               </Paper>
             </Container>
-            <Box container m={3}>
-              <Grid container m={3} justify="center" spacing={1}>
-                <UpdateProfileButton />
-                <DeleteProfileButton />
-              </Grid>
-            </Box>
+            {showDeleteProfile(props, classes)}
           </Paper>
         </Grid>
       </Grid>

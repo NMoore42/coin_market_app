@@ -11,14 +11,14 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function DeleteProfileButton(props) {
+export default function ConfirmDeleteProfileButton(props) {
   const classes = useStyles();
 
   return (
     <div>
 
-      <Button onClick={event => props.handleInputChange("deleteProfile", true)} variant="contained" color="secondary" className={classes.button}>
-        Delete Profile
+      <Button onClick={event => props.handleDeleteProfile()} variant="contained" color="secondary" className={classes.button}>
+        Confirm
       </Button>
       <input
         accept="image/*"

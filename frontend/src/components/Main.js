@@ -123,7 +123,7 @@ export default function Main(props) {
   function renderSwitch(param) {
     switch(param) {
       case 'Portfolio':
-        return <PortfolioContainer 
+        return <PortfolioContainer
           appState={props.appState}
           handleNewTransactionSubmit={props.handleNewTransactionSubmit}
           handleInputChange={props.handleInputChange}/>
@@ -132,7 +132,10 @@ export default function Main(props) {
       case 'Articles':
         return <ArticleContainer appState={props.appState} handleArticleRemove={props.handleArticleRemove}/>;
       case 'Profile':
-        return <ProfileContainer appState={props.appState}/>;
+        return <ProfileContainer
+          appState={props.appState}
+          handleDeleteProfile={props.handleDeleteProfile}
+          handleInputChange={props.handleInputChange}/>;
       default:
         return <CoinContainer appState={props.appState} handleArticleSave={props.handleArticleSave}/>;;
       }
