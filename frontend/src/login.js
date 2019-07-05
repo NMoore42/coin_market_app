@@ -2,16 +2,13 @@ import React from "react";
 import {
   Grid,
   Box,
-  CircularProgress,
   Typography,
   withStyles,
   Button,
   Tabs,
   Tab,
-  TextField,
-  Fade
+  TextField
 } from "@material-ui/core";
-import classnames from "classnames";
 
 import logo from "./images/logo.png";
 
@@ -187,7 +184,7 @@ const styles = theme => ({
   },
   logotypeImage: {
     width: 165,
-    marginBottom: theme.spacing.unit * 4
+    marginBottom: theme.spacing(4)
   },
   logotypeText: {
     color: "white",
@@ -218,15 +215,15 @@ const styles = theme => ({
   greeting: {
     fontWeight: 500,
     textAlign: "center",
-    marginTop: theme.spacing.unit * 4
+    marginTop: theme.spacing(4)
   },
   subGreeting: {
     fontWeight: 500,
     textAlign: "center",
-    marginTop: theme.spacing.unit * 2
+    marginTop: theme.spacing(2)
   },
   creatingButtonContainer: {
-    marginTop: theme.spacing.unit * 2.5,
+    marginTop: theme.spacing(2.5),
     height: 46,
     display: "flex",
     justifyContent: "center",
@@ -237,14 +234,14 @@ const styles = theme => ({
     textTransform: "none"
   },
   formDividerContainer: {
-    marginTop: theme.spacing.unit * 4,
-    marginBottom: theme.spacing.unit * 4,
+    marginTop: theme.spacing(4),
+    marginBottom: theme.spacing(4),
     display: "flex",
     alignItems: "center"
   },
   formDividerWord: {
-    paddingLeft: theme.spacing.unit * 2,
-    paddingRight: theme.spacing.unit * 2
+    paddingLeft: theme.spacing(2),
+    paddingRight: theme.spacing(2)
   },
   formDivider: {
     flexGrow: 1,
@@ -270,7 +267,7 @@ const styles = theme => ({
   },
   formButtons: {
     width: "100%",
-    marginTop: theme.spacing.unit * 4,
+    marginTop: theme.spacing(4),
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center"
@@ -280,14 +277,14 @@ const styles = theme => ({
     fontWeight: 400
   },
   loginLoader: {
-    marginLeft: theme.spacing.unit * 4
+    marginLeft: theme.spacing(4)
   },
   copyright: {
-    marginTop: theme.spacing.unit * 4,
+    marginTop: theme.spacing(4),
     whiteSpace: 'nowrap',
     [theme.breakpoints.up("md")]: {
       position: "absolute",
-      bottom: theme.spacing.unit * 2,
+      bottom: theme.spacing(2),
     }
   }
 });

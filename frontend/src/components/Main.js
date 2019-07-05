@@ -26,6 +26,7 @@ import PortfolioContainer from '../containers/PortfolioContainer.js'
 import ProfileContainer from '../containers/ProfileContainer.js'
 import ArticleContainer from '../containers/ArticleContainer.js'
 import ChartsContainer from '../containers/ChartsContainer.js'
+import LogoutIcon from '@material-ui/icons/Lock';
 import btc_icon from '../../node_modules/cryptocurrency-icons/svg/black/btc.svg';
 import eth_icon from '../../node_modules/cryptocurrency-icons/svg/black/eth.svg';
 import xrp_icon from '../../node_modules/cryptocurrency-icons/svg/black/xrp.svg';
@@ -67,6 +68,9 @@ const useStyles = makeStyles(theme => ({
   },
   menuButton: {
     marginRight: 36,
+  },
+  toolBarButton: {
+    marginLeft: "auto",
   },
   hide: {
     display: 'none',
@@ -165,6 +169,12 @@ export default function Main(props) {
           <Typography variant="h6" noWrap>
             Coin Market App
           </Typography>
+          <IconButton
+            onClick={event => props.logOut()}
+            color="inherit"
+            className={classes.toolBarButton} aria-label="Logout">
+            <LogoutIcon />
+          </IconButton>
         </Toolbar>
       </AppBar>
       <Drawer

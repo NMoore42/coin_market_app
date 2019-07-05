@@ -4,14 +4,10 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
-import Button from '@material-ui/core/Button';
-import ArticleCard from '../cards/ArticleCard';
-import UpdateProfileButton from '../subcomponents/UpdateProfileButton'
 import DeleteProfileButton from '../subcomponents/DeleteProfileButton'
 import CancelDeleteProfileButton from '../subcomponents/CancelDeleteProfileButton'
 import ConfirmDeleteProfileButton from '../subcomponents/ConfirmDeleteProfileButton'
 import logo from '../images/logo.png'
-import uuid from 'uuid'
 
 
 const useStyles = makeStyles(theme => ({

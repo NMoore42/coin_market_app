@@ -177,6 +177,42 @@ export default class App extends Component {
     })
   }
 
+  logOut = () => {
+    this.setState({
+      user: "",
+      deleteProfile: false,
+      userMember: "",
+      email: "",
+      password: "",
+      userId: "",
+      transactions: [],
+      newTransCrypto: "",
+      newTransQuantity: "",
+      newTransType: "",
+      coins: {
+        "Bitcoin": 0,
+        "Ethereum": 0,
+        "Ripple": 0,
+        "Litecoin": 0,
+        "Bitcoin Cash": 0,
+        "EOS": 0,
+        "Cardano": 0,
+        "TRON": 0,
+        "Stellar": 0,
+        "Zcash": 0
+      },
+      loggedIn: false,
+      mainPage: "Portfolio",
+      loginPageTab: 0,
+      userArticles: [],
+      loginEmail: "",
+      loginPassword: "",
+      signUpName: "",
+      signUpEmail: "",
+      signUpPassword: ""
+    })
+  }
+
   loginUser = () => {
     fetch("http://localhost:3000/api/v1/login", {
       method: "POST",
@@ -189,26 +225,30 @@ export default class App extends Component {
         password: this.state.loginPassword
       })
     }).then(res => res.json()).then(res => {
-      let newCoins = Object.assign({}, this.state.coins)
-      for (let key in res.coins) {
-        newCoins[key] = res.coins[key]
+      if (res[0] === "Invalid credentials, please try again") {
+        alert(res[0])
+      } else {
+        let newCoins = Object.assign({}, this.state.coins)
+        for (let key in res.coins) {
+          newCoins[key] = res.coins[key]
+        }
+        this.setState({
+        loggedIn: true,
+        user: res.user.name,
+        coins: newCoins,
+        userId: res.user.id,
+        transactions: res.transactions,
+        userArticles: res.articles,
+        email: res.user.email,
+        password: res.user.password,
+        userMember: res.user.created_at,
+        signUpName: "",
+        signUpPassword: "",
+        signUpEmail: "",
+        loginPassword: "",
+        loginEmail: ""
+      })
       }
-      this.setState({
-      loggedIn: true,
-      user: res.user.name,
-      coins: newCoins,
-      userId: res.user.id,
-      transactions: res.transactions,
-      userArticles: res.articles,
-      email: res.user.email,
-      password: res.user.password,
-      userMember: res.user.created_at,
-      signUpName: "",
-      signUpPassword: "",
-      signUpEmail: "",
-      loginPassword: "",
-      loginEmail: ""
-    })
     })
   }
 
@@ -223,40 +263,7 @@ export default class App extends Component {
   handleDeleteProfile = () => {
     fetch(`http://localhost:3000/api/v1/users/${this.state.userId}`)
       .then(res => res.json())
-      .then(res => this.setState({
-        user: "",
-        deleteProfile: false,
-        userMember: "",
-        email: "",
-        password: "",
-        userId: "",
-        transactions: [],
-        newTransCrypto: "",
-        newTransQuantity: "",
-        newTransType: "",
-        coins: {
-          "Bitcoin": 0,
-          "Ethereum": 0,
-          "Ripple": 0,
-          "Litecoin": 0,
-          "Bitcoin Cash": 0,
-          "EOS": 0,
-          "Cardano": 0,
-          "TRON": 0,
-          "Stellar": 0,
-          "Zcash": 0
-        },
-        loggedIn: false,
-        mainPage: "Portfolio",
-        loginPageTab: 0,
-        userArticles: [],
-        loginEmail: "",
-        loginPassword: "",
-        signUpName: "",
-        signUpEmail: "",
-        signUpPassword: ""
-      })
-    )
+      .then(res => this.logOut())
   }
 
   handleInputChange = (input, value) => {
@@ -373,6 +380,7 @@ export default class App extends Component {
         handleNewTransactionSubmit={this.handleNewTransactionSubmit}
         handleDeleteProfile={this.handleDeleteProfile}
         handleInputChange={this.handleInputChange}
+        logOut={this.logOut}
         appState={this.state}
       />
     :

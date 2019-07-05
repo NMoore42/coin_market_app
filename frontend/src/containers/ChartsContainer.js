@@ -6,9 +6,7 @@ import Box from '@material-ui/core/Box';
 import CoinChartCard from '../cards/CoinChartCard'
 import PortfolioPieCard from '../cards/PortfolioPieCard'
 import PortfolioBarCard from '../cards/PortfolioBarCard'
-import ArticleCard from '../cards/ArticleCard'
-import NewTransactionCard from '../cards/NewTransactionCard';
-import HistoricalTransactionContainer from './HistoricalTransactionContainer'
+
 
 
 const useStyles = makeStyles(theme => ({
