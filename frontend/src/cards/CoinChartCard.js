@@ -9,7 +9,12 @@ export default class Example extends PureComponent {
 
   getCoinPerformance = () => {
     let data = this.props.appState.historicalPrices[this.props.appState.mainPage]
-    data.forEach((element, index) => data[index]["day"] = data[index]["created_at"].slice(5,10))
+    data.forEach((element, index) => {
+      let date = new Date()
+      //This provides a uniform date for the a-xis.  However, if data is not pulled each day, it will not be representative of the actual date.
+      date.setDate(date.getDate() - (6-index))
+      data[index]["day"] = date.toString().slice(4,10)
+    })
     return data
   }
 
@@ -18,10 +23,13 @@ export default class Example extends PureComponent {
     let returnArr = []
     for (let i = 0; i < 7; i ++) {
       let value = 0
+      let date = new Date()
+      //This provides a uniform date for the a-xis.  However, if data is not pulled each day, it will not be representative of the actual date.
+      date.setDate(date.getDate() - (6-i))
       for (let key in data) {
         value += (data[key][i].price * this.props.appState.coins[key])
       }
-      returnArr.push({day: i, price: value})
+      returnArr.push({day: date.toString().slice(4,10), price: value})
     }
     return returnArr
   }
