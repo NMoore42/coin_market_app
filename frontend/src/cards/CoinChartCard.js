@@ -50,7 +50,7 @@ export default class Example extends PureComponent {
       >
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="day" />
-        <YAxis />
+        <YAxis domain={['auto', 'auto']}/>
         <Tooltip />
         <Legend />
         <Line type="monotone" dataKey="price" stroke="#8884d8" activeDot={{ r: 8 }} />

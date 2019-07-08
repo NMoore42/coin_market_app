@@ -317,18 +317,17 @@ export default class App extends Component {
     })
   }
 
-
   componentDidMount = () => {
     this.getHistoricalCoinPrices();
-    this.getCurrentCoinPrices();
-    this.getNewsArticles();
+    // this.getCurrentCoinPrices();
+    // this.getNewsArticles();
 
-    //this.interval = setInterval(this.getCurrentCoinPrices, 60000);
+    // this.interval = setInterval(this.getCurrentCoinPrices, 60000);
     //Remove comment on above when running live demo to live update prices
   }
 
   componentWillUnmount() {
-    //clearInterval(this.interval);
+    // clearInterval(this.interval);
     //Remove comment on above when running live demo to live update prices
   }
 
