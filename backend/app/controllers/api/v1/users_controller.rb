@@ -24,7 +24,8 @@ class Api::V1::UsersController < ApplicationController
 
   def login
     email = params[:email]
-    @user = User.all.find_by(email: email)
+    password = params[:password]
+    @user = User.all.find_by(email: email, password: password)
     if @user
       @coins = Transaction.get_user_coins(@user.id)
       @transactions = @user.transactions.reverse

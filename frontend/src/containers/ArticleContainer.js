@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(2),
     textAlign: 'center',
     color: theme.palette.text.secondary,
-
+    minHeight: "693px"
   },
 }));
 
@@ -48,8 +48,9 @@ export default function ArticleContainer(props) {
               <h1>
               Your Saved Articles
               </h1>
+              <br></br>
             </Box>
-            <Grid container justify="center" spacing={1}>
+            <Grid container align="center" justify="center" spacing={1}>
               {createArticleCards(props)}
             </Grid>
           </Paper>

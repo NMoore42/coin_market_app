@@ -33,7 +33,8 @@ const coins = {
 
 const useStyles = makeStyles({
   card: {
-    maxWidth: 290
+    maxWidth: 290,
+    align: "center"
   },
   media: {
     height: 20
@@ -52,7 +53,7 @@ function censorArticleTitles(props) {
   if (props.articleData.title.includes("Mark II")) {
     return "Canon may offer EOS for professionals before the Olympics..."
   } else {
-    return props.articleData.title.slice(0,65) + "..."
+    return props.articleData.title.slice(0,60) + "..."
   }
 }
 
@@ -86,7 +87,7 @@ export default function MediaCard(props) {
           <Box m={1}>
             <img src={coins[props.coin]} alt="" />
           </Box>
-          <Typography variant="body2" color="textSecondary" component="p">
+          <Typography variant="body2" color="textSecondary" component="h4">
             {censorArticleTitles(props)}
           </Typography>
         </CardContent>

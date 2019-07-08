@@ -16,6 +16,18 @@ const useStyles = makeStyles(theme => ({
     textAlign: 'center',
     color: theme.palette.text.secondary
   },
+  paperCard: {
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+    minHeight: "136px"
+  },
+  paperContainer: {
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+    minHeight: "200px"
+  }
 }));
 
 function get7DayAvgPrice(props) {
@@ -71,25 +83,25 @@ export default function CoinContainer(props) {
           </Paper>
         </Grid>
         <Grid item xs={6}>
-          <Paper className={classes.paper}>
+          <Paper className={classes.paperCard}>
             Current Price
-            <Box m={-2}>
-              <h2>${props.appState.currentPrices[props.appState.mainPage]}</h2>
+            <Box m={-1}>
+              <h1>${props.appState.currentPrices[props.appState.mainPage]}</h1>
             </Box>
           </Paper>
         </Grid>
         <Grid item xs={6}>
-          <Paper className={classes.paper}>
+          <Paper className={classes.paperCard}>
             7 Day Average
-            <Box m={-2}>
-              <h2>
+            <Box m={-1}>
+              <h1>
               ${get7DayAvgPrice(props)}
-              </h2>
+            </h1>
             </Box>
           </Paper>
         </Grid>
         <Grid item xs={12}>
-          <Paper className={classes.paper}>
+          <Paper className={classes.paperContainer}>
             <Grid container className={classes.root} spacing={2}>
               <Grid item xs={12}>
                 <Grid container justify="center" spacing={1}>

@@ -142,8 +142,15 @@ export default class App extends Component {
   }
 
   handleNewTransactionSubmit = () => {
-    if (this.state.newTransType && this.state.newTransCrypto && this.state.newTransQuantity) {
-      this.createNewTransaction()
+    const coin = this.state.newTransCrypto
+    const qty = this.state.newTransQuantity
+    const sign = this.state.newTransType
+    if (sign && coin && qty) {
+      if (this.state.coins[coin] + (qty * sign) > 0) {
+        this.createNewTransaction()
+      } else {
+        alert(`You do not have ${qty} ${coin} in your portfolio to remove`)
+      }
     } else {
       alert("Please fill out all input areas of form to complete transaction")
     }

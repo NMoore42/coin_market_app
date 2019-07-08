@@ -18,6 +18,12 @@ const useStyles = makeStyles(theme => ({
     textAlign: 'center',
     color: theme.palette.text.secondary
   },
+  paperCard: {
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+    minHeight: "352px"
+  },
 }));
 
 export default function ChartsContainer(props) {
@@ -35,7 +41,7 @@ export default function ChartsContainer(props) {
           </Paper>
         </Grid>
         <Grid item xs={6}>
-          <Paper className={classes.paper}>
+          <Paper className={classes.paperCard}>
             <Box m={-3}>
               <h4>Portfolio Makeup</h4>
             </Box>
@@ -43,7 +49,7 @@ export default function ChartsContainer(props) {
           </Paper>
         </Grid>
         <Grid item xs={6}>
-          <Paper className={classes.paper}>
+          <Paper className={classes.paperCard}>
             <Box m={-3}>
               <h4>Portfolio Holdings</h4>
             </Box>

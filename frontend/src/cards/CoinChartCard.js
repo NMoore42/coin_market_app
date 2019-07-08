@@ -8,14 +8,17 @@ export default class Example extends PureComponent {
   static jsfiddleUrl = 'https://jsfiddle.net/alidingling/xqjtetw0/';
 
   getCoinPerformance = () => {
-    let data = this.props.appState.historicalPrices[this.props.appState.mainPage]
+    let data = this.props.appState.historicalPrices[this.props.appState.mainPage].map(obj => {
+      return obj.price > 1 ? parseFloat(obj.price.toFixed(2)) : parseFloat(obj.price.toFixed(6))
+    })
+    let returnArr = []
     data.forEach((element, index) => {
       let date = new Date()
       //This provides a uniform date for the a-xis.  However, if data is not pulled each day, it will not be representative of the actual date.
       date.setDate(date.getDate() - (6-index))
-      data[index]["day"] = date.toString().slice(4,10)
+      returnArr.push({day: date.toString().slice(4,10), price: element})
     })
-    return data
+    return returnArr
   }
 
   getPortfolio = () => {
@@ -29,7 +32,7 @@ export default class Example extends PureComponent {
       for (let key in data) {
         value += (data[key][i].price * this.props.appState.coins[key])
       }
-      returnArr.push({day: date.toString().slice(4,10), price: value})
+      returnArr.push({day: date.toString().slice(4,10), price: value.toFixed(2)})
     }
     return returnArr
   }

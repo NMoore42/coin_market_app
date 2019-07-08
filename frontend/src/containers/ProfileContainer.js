@@ -14,12 +14,17 @@ const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
   },
-  paper: {
+  paperContainer: {
     padding: theme.spacing(2),
     textAlign: 'center',
     color: theme.palette.text.secondary,
-
+    minHeight: "693px"
   },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary
+  }
 }));
 
 function showDeleteProfile(props, classes) {
@@ -50,7 +55,7 @@ export default function ProfileContainer(props) {
     <div className={classes.root}>
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <Paper className={classes.paper}>
+          <Paper className={classes.paperContainer}>
             <Box m={-3}>
               <h1>
                 Your Profile
