@@ -50,7 +50,7 @@ function censorArticleTitles(props) {
   if (props.articleData.title.includes("girthy")) {
     return "This odd image is buried deep inside the Ethereum blockchain..."
   }
-  if (props.articleData.title.includes("Mark II")) {
+  if (props.articleData.title.includes("キヤノ")) {
     return "Canon may offer EOS for professionals before the Olympics..."
   } else {
     return props.articleData.title.slice(0,60) + "..."
