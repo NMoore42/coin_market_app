@@ -1,11 +1,11 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
+import { Grid, Box } from '@material-ui/core';
 import SendReceiveButton from '../subcomponents/SendReceiveButton';
 import QuantityInput from '../subcomponents/QuantityInput';
 import TickerSelect from '../subcomponents/TickerSelect';
 import SubmitButton from '../subcomponents/SubmitButton';
-import Box from '@material-ui/core/Box';
+
 
 const useStyles = makeStyles(theme => ({
   root: {

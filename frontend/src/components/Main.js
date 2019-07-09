@@ -2,31 +2,10 @@ import React from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import CoinContainer from '../containers/CoinContainer.js'
-import Drawer from '@material-ui/core/Drawer';
-import AppBar from '@material-ui/core/AppBar';
-import Container from '@material-ui/core/Container';
-import Toolbar from '@material-ui/core/Toolbar';
-import Icon from '@material-ui/core/Icon';
-import List from '@material-ui/core/List';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import ChartIcon from '@material-ui/icons/BarChart';
-import ProfileIcon from '@material-ui/icons/Face';
-import MoneyIcon from '@material-ui/icons/AttachMoney';
-import ArticleIcon from '@material-ui/icons/LibraryBooks';
 import PortfolioContainer from '../containers/PortfolioContainer.js'
 import ProfileContainer from '../containers/ProfileContainer.js'
 import ArticleContainer from '../containers/ArticleContainer.js'
 import ChartsContainer from '../containers/ChartsContainer.js'
-import LogoutIcon from '@material-ui/icons/Lock';
 import btc_icon from '../../node_modules/cryptocurrency-icons/svg/black/btc.svg';
 import eth_icon from '../../node_modules/cryptocurrency-icons/svg/black/eth.svg';
 import xrp_icon from '../../node_modules/cryptocurrency-icons/svg/black/xrp.svg';
@@ -37,6 +16,10 @@ import ada_icon from '../../node_modules/cryptocurrency-icons/svg/black/ada.svg'
 import xlm_icon from '../../node_modules/cryptocurrency-icons/svg/black/xlm.svg';
 import trx_icon from '../../node_modules/cryptocurrency-icons/svg/black/trx.svg';
 import zec_icon from '../../node_modules/cryptocurrency-icons/svg/black/zec.svg';
+import { Drawer, AppBar, Toolbar, Container, Icon, List, CssBaseline,
+         Typography, Divider, IconButton, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
+import { ChevronLeft, ChevronRight, Menu, BarChart, Face, AttachMoney,
+         LibraryBooks, Lock } from '@material-ui/icons';
 
 const drawerWidth = 240;
 
@@ -164,7 +147,7 @@ export default function Main(props) {
               [classes.hide]: open,
             })}
           >
-            <MenuIcon />
+            <Menu />
           </IconButton>
           <Typography variant="h6" noWrap>
             Coin Market App
@@ -173,7 +156,7 @@ export default function Main(props) {
             onClick={event => props.logOut()}
             color="inherit"
             className={classes.toolBarButton} aria-label="Logout">
-            <LogoutIcon />
+            <Lock />
           </IconButton>
         </Toolbar>
       </AppBar>
@@ -193,14 +176,14 @@ export default function Main(props) {
       >
         <div className={classes.toolbar}>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+            {theme.direction === 'rtl' ? <ChevronRight /> : <ChevronLeft />}
           </IconButton>
         </div>
         <Divider />
         <List>
           {['Portfolio', 'Charts', 'Articles', 'Profile'].map((text, index) => (
             <ListItem onClick={event => props.handleMenuClick(text)} button key={text}>
-              <ListItemIcon>{[<MoneyIcon/>, <ChartIcon/>,<ArticleIcon/>, <ProfileIcon />][index]}</ListItemIcon>
+              <ListItemIcon>{[<AttachMoney/>, <BarChart/>,<LibraryBooks/>, <Face />][index]}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}

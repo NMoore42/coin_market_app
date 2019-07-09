@@ -1,12 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
-import Box from '@material-ui/core/Box';
-import Typography from '@material-ui/core/Typography';
+import { CardActionArea, CardActions, CardContent, Button, Box, Card, Typography } from '@material-ui/core';
 import btc_icon from '../../node_modules/cryptocurrency-icons/svg/color/btc.svg';
 import eth_icon from '../../node_modules/cryptocurrency-icons/svg/color/eth.svg';
 import xrp_icon from '../../node_modules/cryptocurrency-icons/svg/color/xrp.svg';

@@ -1,15 +1,5 @@
 import React from "react";
-import {
-  Grid,
-  Box,
-  Typography,
-  withStyles,
-  Button,
-  Tabs,
-  Tab,
-  TextField
-} from "@material-ui/core";
-
+import { Grid, Box, Typography, withStyles, Button, Tabs, Tab, TextField } from "@material-ui/core";
 import logo from "./images/logo.png";
 
 
