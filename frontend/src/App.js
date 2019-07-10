@@ -96,6 +96,13 @@ export default class App extends Component {
     })
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (JSON.stringify(prevState) !== JSON.stringify(this.state)) {
+      const json = JSON.stringify(this.state);
+      localStorage.setItem("appState", json);
+    }
+  }
+
   handleArticleSave = (articleData, coinKey) => {
     fetch("http://localhost:3000/api/v1/articles", {
       method: "POST",
@@ -248,12 +255,7 @@ export default class App extends Component {
         userArticles: res.articles,
         email: res.user.email,
         password: res.user.password,
-        userMember: res.user.created_at,
-        signUpName: "",
-        signUpPassword: "",
-        signUpEmail: "",
-        loginPassword: "",
-        loginEmail: ""
+        userMember: res.user.created_at
       })
       }
     })
@@ -330,16 +332,36 @@ export default class App extends Component {
   }
 
   componentDidMount = () => {
-    this.getHistoricalCoinPrices();
-    // this.getCurrentCoinPrices();
-    // this.getNewsArticles();
+    if (localStorage.appState !== undefined) {
+      const appState = JSON.parse(localStorage.getItem('appState'));
+      this.setState({
+        loggedIn: appState.loggedIn,
+        user: appState.user,
+        coins: appState.coins,
+        userId: appState.userId,
+        transactions: appState.transactions,
+        userArticles: appState.userArticles,
+        email: appState.email,
+        password: appState.password,
+        userMember: appState.userMember,
+        signUpName: "",
+        signUpPassword: "",
+        signUpEmail: "",
+        loginPassword: "",
+        loginEmail: ""
+      })
+    }
 
-    // this.interval = setInterval(this.getCurrentCoinPrices, 60000);
+    this.getHistoricalCoinPrices();
+    this.getCurrentCoinPrices();
+    this.getNewsArticles();
+
+    this.interval = setInterval(this.getCurrentCoinPrices, 60000);
     //Remove comment on above when running live demo to live update prices
   }
 
   componentWillUnmount() {
-    // clearInterval(this.interval);
+    clearInterval(this.interval);
     //Remove comment on above when running live demo to live update prices
   }
 
