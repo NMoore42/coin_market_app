@@ -19,18 +19,20 @@ const coins = {
 export default class App extends Component {
   constructor() {
     super()
+    let appState;
+    localStorage.appState !== undefined ? appState = JSON.parse(localStorage.getItem('appState')) : appState = localStorage
     this.state = {
-      user: "",
-      deleteProfile: false,
-      userMember: "",
-      email: "",
-      password: "",
-      userId: "",
-      transactions: [],
-      newTransCrypto: "",
-      newTransQuantity: "",
-      newTransType: "",
-      coins: {
+      user: appState.user || "",
+      deleteProfile: appState.deleteProfile || false,
+      userMember: appState.userMember || "",
+      email: appState.email || "",
+      password: appState.password || "",
+      userId: appState.userId || "",
+      transactions: appState.transactions || [],
+      newTransCrypto: appState.newTransCrypto || "",
+      newTransQuantity: appState.newTransQuantity || "",
+      newTransType: appState.newTransType || "",
+      coins: appState.coins || {
         "Bitcoin": 0,
         "Ethereum": 0,
         "Ripple": 0,
@@ -42,10 +44,10 @@ export default class App extends Component {
         "Stellar": 0,
         "Zcash": 0
       },
-      loggedIn: false,
-      mainPage: "Portfolio",
-      loginPageTab: 0,
-      currentPrices: {
+      loggedIn: appState.loggedIn || false,
+      mainPage: appState.mainPage || "Portfolio",
+      loginPageTab: appState.loginPageTab || 0,
+      currentPrices: appState.currentPrices || {
         "Bitcoin": 0,
         "Ethereum": 0,
         "Ripple": 0,
@@ -57,7 +59,7 @@ export default class App extends Component {
         "Stellar": 0,
         "Zcash": 0
       },
-      historicalPrices: {
+      historicalPrices: appState.historicalPrices || {
         "Bitcoin": [],
         "Ethereum": [],
         "Ripple": [],
@@ -69,7 +71,7 @@ export default class App extends Component {
         "Stellar": [],
         "Zcash": []
       },
-      articles: {
+      articles: appState.articles || {
         "Bitcoin": [],
         "Ethereum": [],
         "Ripple": [],
@@ -81,12 +83,12 @@ export default class App extends Component {
         "Stellar": [],
         "Zcash": []
       },
-      userArticles: [],
-      loginEmail: "",
-      loginPassword: "",
-      signUpName: "",
-      signUpEmail: "",
-      signUpPassword: ""
+      userArticles: appState.userArticles || [],
+      loginEmail: appState.loginEmail || "",
+      loginPassword: appState.loginPassword || "",
+      signUpName: appState.signUpName || "",
+      signUpEmail: appState.signUpEmail || "",
+      signUpPassword: appState.signUpPassword || ""
     }
   }
 
@@ -332,26 +334,6 @@ export default class App extends Component {
   }
 
   componentDidMount = () => {
-    if (localStorage.appState !== undefined) {
-      const appState = JSON.parse(localStorage.getItem('appState'));
-      this.setState({
-        loggedIn: appState.loggedIn,
-        user: appState.user,
-        coins: appState.coins,
-        userId: appState.userId,
-        transactions: appState.transactions,
-        userArticles: appState.userArticles,
-        email: appState.email,
-        password: appState.password,
-        userMember: appState.userMember,
-        signUpName: "",
-        signUpPassword: "",
-        signUpEmail: "",
-        loginPassword: "",
-        loginEmail: ""
-      })
-    }
-
     this.getHistoricalCoinPrices();
     this.getCurrentCoinPrices();
     this.getNewsArticles();
