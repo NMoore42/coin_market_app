@@ -281,6 +281,7 @@ export default class App extends Component {
 
   validateSignUpUser = () => {
     if (this.state.signUpName && this.state.signUpEmail && this.state.signUpPassword) {
+      if (this.state.signUpEmail)
       this.signUpUser()
     } else {
       alert("Please fill out all areas of New User Form!")
@@ -301,40 +302,44 @@ export default class App extends Component {
       })
     }).then(res => res.json())
     .then(res => {
-        let newCoins = Object.assign({}, this.state.coins)
-        for (let key in res.coins) {
-          newCoins[key] = res.coins[key]
-        }
-        this.setState({
-        loggedIn: true,
-        user: res.user.name,
-        coins: newCoins,
-        userId: res.user.id,
-        transactions: res.transactions,
-        userArticles: res.articles,
-        email: res.user.email,
-        password: res.user.password,
-        userMember: res.user.created_at,
-        signUpName: "",
-        signUpPassword: "",
-        signUpEmail: "",
-        loginPassword: "",
-        loginEmail: ""
-      })
+        if (res.errors) {
+          alert(res.errors[0])
+        } else {
+          let newCoins = Object.assign({}, this.state.coins)
+          for (let key in res.coins) {
+            newCoins[key] = res.coins[key]
+          }
+          this.setState({
+          loggedIn: true,
+          user: res.user.name,
+          coins: newCoins,
+          userId: res.user.id,
+          transactions: res.transactions,
+          userArticles: res.articles,
+          email: res.user.email,
+          password: res.user.password,
+          userMember: res.user.created_at,
+          signUpName: "",
+          signUpPassword: "",
+          signUpEmail: "",
+          loginPassword: "",
+          loginEmail: ""
+        })
+      }
     })
   }
 
   componentDidMount = () => {
     this.getHistoricalCoinPrices();
-    this.getCurrentCoinPrices();
-    this.getNewsArticles();
+    // this.getCurrentCoinPrices();
+    // this.getNewsArticles();
 
-    this.interval = setInterval(this.getCurrentCoinPrices, 60000);
+    // this.interval = setInterval(this.getCurrentCoinPrices, 60000);
     //Remove comment on above when running live demo to live update prices
   }
 
   componentWillUnmount() {
-    clearInterval(this.interval);
+    // clearInterval(this.interval);
     //Remove comment on above when running live demo to live update prices
   }
 
