@@ -4,7 +4,7 @@ class User < ApplicationRecord
   has_many :transactions
   has_many :cryptos, through: :transactions
   validates :name, :email, :password, presence: true
-  validates :name, :email, uniqueness: true
+  validates :email, uniqueness: true
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
   validate :check_password_format
 
