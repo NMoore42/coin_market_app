@@ -307,7 +307,7 @@ export default class App extends Component {
     }).then(res => res.json())
     .then(res => {
         if (res.errors) {
-          alert(res.errors[0])
+          alert(res.errors.join("\n"))
         } else {
           let newCoins = Object.assign({}, this.state.coins)
           for (let key in res.coins) {
